@@ -1,483 +1,997 @@
-/* ==========================================================================
-   Nova AI - Interactive Application Logic
-   ========================================================================== */
+// --- APP STATE ---
+let currentInput = "0";
+let storedVal = null;
+let pendingOp = "";
+let prevOpText = "";
+let isEvaluated = false;
 
-document.addEventListener('DOMContentLoaded', () => {
-  // Initialize Lucide Icons
-  if (typeof lucide !== 'undefined') {
-    lucide.createIcons();
+// Voice and Sound Settings
+let soundProfile = localStorage.getItem("soundProfile") || "chime"; // chime, 8bit, keyboard, mute
+let theme = localStorage.getItem("theme") || "midnight"; // midnight, cyberpunk, aurora, sakura
+let speechReadoutEnabled = localStorage.getItem("speechReadout") === "true";
+let history = JSON.parse(localStorage.getItem("calcHistory")) || [];
+
+// --- DOM ELEMENTS ---
+const prevOpEl = document.getElementById("prevOp");
+const currentValEl = document.getElementById("currentVal");
+const copyResultBtn = document.getElementById("copyResult");
+const copyToast = document.getElementById("copyToast");
+
+const soundSelect = document.getElementById("soundProfileSelect");
+const themeSelect = document.getElementById("themeSelect");
+const voiceSpeakToggleBtn = document.getElementById("voiceSpeakToggle");
+const voiceBtn = document.getElementById("voiceBtn");
+
+const solversToggleBtn = document.getElementById("solversToggle");
+const solversPanel = document.getElementById("solversPanel");
+const solverSelect = document.getElementById("solverSelect");
+const solverForms = {
+  split: document.getElementById("formSplit"),
+  bmi: document.getElementById("formBmi"),
+  pythagoras: document.getElementById("formPythagoras")
+};
+
+// Solvers Inputs/Outputs
+const billAmtInput = document.getElementById("billAmt");
+const tipPctInput = document.getElementById("tipPct");
+const splitPeopleInput = document.getElementById("splitPeople");
+const btnSolveSplit = document.getElementById("btnSolveSplit");
+const resultSplitBox = document.getElementById("resultSplit");
+const valTipTotal = document.getElementById("valTipTotal");
+const valTipPer = document.getElementById("valTipPer");
+const valTotalPer = document.getElementById("valTotalPer");
+const loadbackSplit = document.getElementById("loadbackSplit");
+
+const bmiWeightInput = document.getElementById("bmiWeight");
+const bmiHeightInput = document.getElementById("bmiHeight");
+const btnSolveBmi = document.getElementById("btnSolveBmi");
+const resultBmiBox = document.getElementById("resultBmi");
+const valBmiScore = document.getElementById("valBmiScore");
+const valBmiClass = document.getElementById("valBmiClass");
+const loadbackBmi = document.getElementById("loadbackBmi");
+
+const pythAInput = document.getElementById("pythA");
+const pythBInput = document.getElementById("pythB");
+const btnSolvePyth = document.getElementById("btnSolvePyth");
+const resultPythBox = document.getElementById("resultPyth");
+const valPythC = document.getElementById("valPythC");
+const loadbackPyth = document.getElementById("loadbackPyth");
+
+const historyToggleBtn = document.getElementById("historyToggle");
+const historyPanel = document.getElementById("historyPanel");
+const historyList = document.getElementById("historyList");
+const clearHistoryBtn = document.getElementById("clearHistory");
+const loadingScreen = document.getElementById("loadingScreen");
+const keypad = document.querySelector(".keypad");
+
+// --- AUDIO SYNTHESIS ENGINE (WEB AUDIO API) ---
+let audioCtx = null;
+
+function initAudio() {
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   }
+}
 
-  /* --------------------------------------------------------------------------
-     1. Preloader Simulation
-     -------------------------------------------------------------------------- */
-  const preloader = document.getElementById('preloader');
-  const preloaderBar = document.getElementById('preloader-bar');
+function playClickSound(type = "default") {
+  if (soundProfile === "mute") return;
   
-  if (preloader && preloaderBar) {
-    let progress = 0;
-    const interval = setInterval(() => {
-      progress += Math.floor(Math.random() * 15) + 5;
-      if (progress >= 100) {
-        progress = 100;
-        clearInterval(interval);
-        setTimeout(() => {
-          preloader.classList.add('fade-out');
-          document.body.style.overflowY = 'auto'; // Re-enable scroll
-        }, 300);
-      }
-      preloaderBar.style.width = `${progress}%`;
-    }, 50);
-  }
-
-  /* --------------------------------------------------------------------------
-     2. Custom Cursor (Desktop Only)
-     -------------------------------------------------------------------------- */
-  const cursorDot = document.getElementById('cursor-dot');
-  const cursorOutline = document.getElementById('cursor-outline');
-
-  const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-
-  if (!isTouchDevice && cursorDot && cursorOutline) {
-    // Show custom cursor elements
-    cursorDot.style.display = 'block';
-    cursorOutline.style.display = 'block';
-
-    let cursorX = 0;
-    let cursorY = 0;
-    let outlineX = 0;
-    let outlineY = 0;
-
-    document.addEventListener('mousemove', (e) => {
-      cursorX = e.clientX;
-      cursorY = e.clientY;
-      cursorDot.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0) translate(-50%, -50%)`;
-    });
-
-    // Smooth lerp (linear interpolation) animation loop for the outer cursor outline
-    const animateOutline = () => {
-      const lerpFactor = 0.15; // Speed factor of the outer ring following the dot
-      outlineX += (cursorX - outlineX) * lerpFactor;
-      outlineY += (cursorY - outlineY) * lerpFactor;
-      cursorOutline.style.transform = `translate3d(${outlineX}px, ${outlineY}px, 0) translate(-50%, -50%)`;
-      requestAnimationFrame(animateOutline);
-    };
-    requestAnimationFrame(animateOutline);
-
-    // Scaling effect on hoverable elements
-    const hoverElements = document.querySelectorAll('a, button, .faq-trigger, .pricing-toggle-btn, .form-input, .social-icon');
-    hoverElements.forEach(elem => {
-      elem.addEventListener('mouseenter', () => {
-        cursorOutline.classList.add('hovered');
-      });
-      elem.addEventListener('mouseleave', () => {
-        cursorOutline.classList.remove('hovered');
-      });
-    });
-  }
-
-  /* --------------------------------------------------------------------------
-     3. Scroll Progress Bar & Sticky Navbar
-     -------------------------------------------------------------------------- */
-  const scrollProgress = document.getElementById('scroll-progress');
-  const navbar = document.getElementById('navbar');
-
-  window.addEventListener('scroll', () => {
-    // Scroll progress indicator
-    const windowScroll = document.documentElement.scrollTop || document.body.scrollTop;
-    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    if (height > 0) {
-      const scrolled = (windowScroll / height) * 100;
-      if (scrollProgress) {
-        scrollProgress.style.width = `${scrolled}%`;
-      }
+  try {
+    initAudio();
+    if (audioCtx.state === 'suspended') {
+      audioCtx.resume();
     }
 
-    // Sticky navbar backdrop change
-    if (navbar) {
-      if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
+    const osc1 = audioCtx.createOscillator();
+    const osc2 = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+    const filter = audioCtx.createBiquadFilter();
+    
+    osc1.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+    
+    const now = audioCtx.currentTime;
+
+    if (soundProfile === "chime") {
+      // 1. CHIME SYNTH PROFILE (Pure Sine Wave Sweeps)
+      osc1.type = "sine";
+      if (type === "equals") {
+        osc1.frequency.setValueAtTime(880, now); // A5
+        osc1.frequency.exponentialRampToValueAtTime(1320, now + 0.08); // E6
+        gainNode.gain.setValueAtTime(0.08, now);
+        gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.16);
+        osc1.start(now);
+        osc1.stop(now + 0.16);
+      } else if (type === "clear" || type === "delete") {
+        osc1.frequency.setValueAtTime(440, now);
+        osc1.frequency.exponentialRampToValueAtTime(220, now + 0.06);
+        gainNode.gain.setValueAtTime(0.1, now);
+        gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+        osc1.start(now);
+        osc1.stop(now + 0.08);
+      } else if (type === "op") {
+        osc1.frequency.setValueAtTime(784, now); // G5
+        osc1.frequency.exponentialRampToValueAtTime(523, now + 0.04); // C5
+        gainNode.gain.setValueAtTime(0.06, now);
+        gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+        osc1.start(now);
+        osc1.stop(now + 0.05);
       } else {
-        navbar.classList.remove('scrolled');
+        osc1.frequency.setValueAtTime(987, now); // B5
+        osc1.frequency.exponentialRampToValueAtTime(880, now + 0.03); // A5
+        gainNode.gain.setValueAtTime(0.05, now);
+        gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+        osc1.start(now);
+        osc1.stop(now + 0.04);
+      }
+
+    } else if (soundProfile === "8bit") {
+      // 2. RETRO 8-BIT GAME PROFILE (Square Waves & Arpeggios)
+      osc1.type = "square";
+      if (type === "equals") {
+        // Classic retro powerup chime
+        osc1.frequency.setValueAtTime(523, now); // C5
+        osc1.frequency.setValueAtTime(659, now + 0.04); // E5
+        osc1.frequency.setValueAtTime(784, now + 0.08); // G5
+        osc1.frequency.setValueAtTime(1046, now + 0.12); // C6
+        gainNode.gain.setValueAtTime(0.05, now);
+        gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+        osc1.start(now);
+        osc1.stop(now + 0.25);
+      } else if (type === "clear" || type === "delete") {
+        // Retro explosion sweep
+        osc1.frequency.setValueAtTime(300, now);
+        osc1.frequency.linearRampToValueAtTime(60, now + 0.1);
+        gainNode.gain.setValueAtTime(0.08, now);
+        gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+        osc1.start(now);
+        osc1.stop(now + 0.1);
+      } else if (type === "op") {
+        // High laser click
+        osc1.frequency.setValueAtTime(1200, now);
+        osc1.frequency.exponentialRampToValueAtTime(200, now + 0.05);
+        gainNode.gain.setValueAtTime(0.04, now);
+        gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+        osc1.start(now);
+        osc1.stop(now + 0.05);
+      } else {
+        // Quick short coin-click
+        osc1.frequency.setValueAtTime(800, now);
+        osc1.frequency.setValueAtTime(1200, now + 0.02);
+        gainNode.gain.setValueAtTime(0.03, now);
+        gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+        osc1.start(now);
+        osc1.stop(now + 0.04);
+      }
+
+    } else if (soundProfile === "keyboard") {
+      // 3. MECHANICAL KEYBOARD PROFILE (Simulating mechanical blue/brown click)
+      osc1.connect(filter);
+      osc2.connect(filter);
+      filter.connect(audioCtx.destination);
+      
+      filter.type = "bandpass";
+      filter.frequency.setValueAtTime(1000, now);
+      filter.Q.setValueAtTime(2, now);
+
+      osc1.type = "triangle";
+      osc1.frequency.setValueAtTime(120, now); // Low-frequency bottom-out thump
+
+      osc2.type = "sine";
+      osc2.frequency.setValueAtTime(1800, now); // High-frequency metallic leaf click
+
+      const clickDuration = type === "equals" ? 0.07 : 0.04;
+      gainNode.gain.setValueAtTime(0.12, now);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, now + clickDuration);
+
+      osc1.start(now);
+      osc2.start(now);
+      osc1.stop(now + clickDuration);
+      osc2.stop(now + clickDuration);
+    }
+  } catch (err) {
+    console.warn("Audio Context error:", err);
+  }
+}
+
+// --- TEXT-TO-SPEECH READOUT ENGINE ---
+function speakText(text) {
+  if (!speechReadoutEnabled) return;
+  try {
+    if (window.speechSynthesis) {
+      // Clear ongoing speech
+      window.speechSynthesis.cancel();
+      
+      const textToSpeak = text
+        .replace(/÷/g, "divided by")
+        .replace(/×/g, "times")
+        .replace(/−/g, "minus")
+        .replace(/-/g, "minus")
+        .replace(/\+/g, "plus")
+        .replace(/=/g, "equals");
+
+      const utterance = new SpeechSynthesisUtterance(textToSpeak);
+      utterance.rate = 1.05;
+      utterance.pitch = 1.0;
+      window.speechSynthesis.speak(utterance);
+    }
+  } catch (err) {
+    console.error("Speech Synthesis error: ", err);
+  }
+}
+
+// --- SPEECH RECOGNITION ENGINE (VOICE INPUT) ---
+let recognition = null;
+if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+  const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+  recognition = new SpeechRec();
+  recognition.continuous = false;
+  recognition.lang = 'en-US';
+  recognition.interimResults = false;
+
+  recognition.onstart = () => {
+    voiceBtn.classList.add("listening");
+    prevOpText = "Listening for formula...";
+    currentInput = "";
+    updateDisplay();
+  };
+
+  recognition.onend = () => {
+    voiceBtn.classList.remove("listening");
+  };
+
+  recognition.onerror = (e) => {
+    console.error("Speech Recognition error: ", e.error);
+    voiceBtn.classList.remove("listening");
+    triggerError("Voice Error");
+  };
+
+  recognition.onresult = (e) => {
+    const transcript = e.results[0][0].transcript;
+    parseSpeechInput(transcript);
+  };
+} else {
+  voiceBtn.style.display = "none"; // Hide button if API is unsupported
+}
+
+function parseSpeechInput(transcript) {
+  // Normalize spoken phrase
+  let query = transcript.toLowerCase().trim();
+  
+  // Replace spoken phrases with math operators
+  query = query
+    .replace(/plus/g, "+")
+    .replace(/minus/g, "-")
+    .replace(/times/g, "*")
+    .replace(/multiplied by/g, "*")
+    .replace(/multiply/g, "*")
+    .replace(/into/g, "*")
+    .replace(/divided by/g, "/")
+    .replace(/divide/g, "/")
+    .replace(/over/g, "/")
+    .replace(/by/g, "/")
+    .replace(/percent/g, "%")
+    .replace(/percentage/g, "%")
+    .replace(/point/g, ".")
+    .replace(/dot/g, ".");
+
+  // Word-to-number mapping
+  const wordMap = {
+    zero: 0, one: 1, two: 2, three: 3, four: 4, five: 5,
+    six: 6, seven: 7, eight: 8, nine: 9, ten: 10
+  };
+  
+  Object.keys(wordMap).forEach(word => {
+    const regex = new RegExp(`\\b${word}\\b`, 'g');
+    query = query.replace(regex, wordMap[word]);
+  });
+
+  // Purge any unwanted alpha characters (sanitize check)
+  query = query.replace(/[^0-9\+\-\*\/\%\. ]/g, "").replace(/\s+/g, "");
+
+  if (!query) {
+    triggerError("Could not understand");
+    return;
+  }
+
+  // Safe manual evaluation parser to bypass eval()
+  try {
+    const result = parseAndEvaluateExpression(query);
+    
+    // UI mapping values
+    const uiExpression = query
+      .replace(/\//g, " ÷ ")
+      .replace(/\*/g, " × ")
+      .replace(/\-/g, " − ")
+      .replace(/\+/g, " + ");
+      
+    prevOpText = `${uiExpression} =`;
+    currentInput = result.toString();
+    isEvaluated = true;
+    updateDisplay();
+    
+    // Speak out the final solution
+    speakText(`Result is ${formatNumber(result)}`);
+    saveToHistory(uiExpression, formatNumber(result));
+  } catch (err) {
+    console.error("Voice parse error: ", err);
+    triggerError("Calculation Error");
+  }
+}
+
+// Custom Safe Expression Parser (Shunting-yard Evaluation)
+function parseAndEvaluateExpression(expr) {
+  // Convert operators to array of tokens
+  const tokens = expr.match(/(\d+(?:\.\d+)?|[\+\-\*\/\%])/g);
+  if (!tokens) throw new Error("Invalid expression");
+
+  // Output Queue & Operator Stack
+  const outQueue = [];
+  const opStack = [];
+
+  const precedence = {
+    "+": 1, "-": 1,
+    "*": 2, "/": 2, "%": 2
+  };
+
+  tokens.forEach(token => {
+    if (!isNaN(parseFloat(token))) {
+      outQueue.push(parseFloat(token));
+    } else {
+      while (
+        opStack.length &&
+        precedence[opStack[opStack.length - 1]] >= precedence[token]
+      ) {
+        outQueue.push(opStack.pop());
+      }
+      opStack.push(token);
+    }
+  });
+
+  while (opStack.length) {
+    outQueue.push(opStack.pop());
+  }
+
+  // Process RPN Queue
+  const evalStack = [];
+  outQueue.forEach(token => {
+    if (typeof token === "number") {
+      evalStack.push(token);
+    } else {
+      const b = evalStack.pop();
+      const a = evalStack.pop();
+      
+      if (a === undefined || b === undefined) throw new Error("Parser structure error");
+      
+      switch (token) {
+        case "+": evalStack.push(a + b); break;
+        case "-": evalStack.push(a - b); break;
+        case "*": evalStack.push(a * b); break;
+        case "/": 
+          if (b === 0) throw new Error("Divide by zero");
+          evalStack.push(a / b); 
+          break;
+        case "%": evalStack.push((a / 100) * b); break; // Standard percentage share
       }
     }
   });
 
-  /* --------------------------------------------------------------------------
-     4. Mobile Navigation Menu Toggle
-     -------------------------------------------------------------------------- */
-  const mobileToggle = document.getElementById('mobile-toggle');
-  const navMenu = document.getElementById('nav-menu');
-  const navLinksList = document.querySelectorAll('.nav-link');
+  if (evalStack.length !== 1) throw new Error("Evaluation error");
+  return evalStack[0];
+}
 
-  if (mobileToggle && navMenu) {
-    mobileToggle.addEventListener('click', () => {
-      mobileToggle.classList.toggle('open');
-      navMenu.classList.toggle('open');
-      document.body.classList.toggle('no-scroll');
-    });
+voiceBtn.addEventListener("click", (e) => {
+  initAudio();
+  playClickSound("default");
+  createRipple(e, voiceBtn);
+  if (recognition) {
+    try {
+      recognition.start();
+    } catch(err) {
+      recognition.stop();
+    }
+  }
+});
 
-    // Close mobile nav when clicking a link
-    navLinksList.forEach(link => {
-      link.addEventListener('click', () => {
-        mobileToggle.classList.remove('open');
-        navMenu.classList.remove('open');
-        document.body.classList.remove('no-scroll');
-      });
-    });
+// --- DISPLAY FORMATTING HELPERS ---
+function formatNumber(num) {
+  if (num === null || num === undefined) return "";
+  if (typeof num === "string") {
+    if (isNaN(Number(num))) return num;
+    num = parseFloat(num);
+  }
+  
+  if (Math.abs(num) > 1e12 || (Math.abs(num) < 1e-6 && num !== 0)) {
+    return num.toExponential(5);
   }
 
-  /* --------------------------------------------------------------------------
-     5. Scroll Spy Navigation Highlight
-     -------------------------------------------------------------------------- */
-  const sections = document.querySelectorAll('section[id]');
+  const maxDecimals = 10;
+  const rounded = Number(Math.round(num + 'e' + maxDecimals) + 'e-' + maxDecimals);
   
-  const scrollSpy = () => {
-    const scrollY = window.pageYOffset;
+  const parts = rounded.toString().split(".");
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return parts.join(".");
+}
+
+function updateDisplay() {
+  prevOpEl.textContent = prevOpText;
+  
+  let formattedInput = currentInput;
+  if (currentInput !== "Cannot divide by zero" && currentInput !== "Error" && currentInput !== "Voice Error" && currentInput !== "Could not understand") {
+    const hasDecimal = currentInput.includes(".");
+    const parts = currentInput.split(".");
+    const intPart = parseFloat(parts[0]);
     
-    sections.forEach(current => {
-      const sectionHeight = current.offsetHeight;
-      const sectionTop = current.offsetTop - 100; // Offset for sticky header
-      const sectionId = current.getAttribute('id');
-      
-      const navLink = document.querySelector(`.nav-links a[href*=${sectionId}]`);
-      
-      if (navLink) {
-        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-          navLinksList.forEach(link => link.classList.remove('active'));
-          navLink.classList.add('active');
-        }
+    if (!isNaN(intPart)) {
+      formattedInput = intPart.toLocaleString('en-US');
+      if (hasDecimal) {
+        formattedInput += "." + (parts[1] || "");
       }
-    });
-  };
-  window.addEventListener('scroll', scrollSpy);
-
-  /* --------------------------------------------------------------------------
-     6. Card Radial Mouse Glow Effect (Mouse Hover tracking)
-     -------------------------------------------------------------------------- */
-  const cards = document.querySelectorAll('.card-glow');
-  
-  if (!isTouchDevice) {
-    cards.forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left; // Mouse relative x coordinate inside the card
-        const y = e.clientY - rect.top;  // Mouse relative y coordinate inside the card
-        
-        card.style.setProperty('--mouse-x', `${x}px`);
-        card.style.setProperty('--mouse-y', `${y}px`);
-      });
-    });
+    }
   }
+  currentValEl.textContent = formattedInput;
 
-  /* --------------------------------------------------------------------------
-     7. Typing Text Animation (Hero Section)
-     -------------------------------------------------------------------------- */
-  const typingTarget = document.getElementById('typing-target');
-  const words = ["Artificial Intelligence.", "Workflow Automation.", "Smart Analytics.", "Productive Futures."];
-  
-  if (typingTarget) {
-    let wordIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    let typeDelay = 100;
-
-    const typeAnimation = () => {
-      const currentWord = words[wordIndex];
-      
-      if (isDeleting) {
-        typingTarget.textContent = currentWord.substring(0, charIndex - 1);
-        charIndex--;
-        typeDelay = 40; // Speeds up deleting
-      } else {
-        typingTarget.textContent = currentWord.substring(0, charIndex + 1);
-        charIndex++;
-        typeDelay = 120; // Normal typing speed
-      }
-
-      if (!isDeleting && charIndex === currentWord.length) {
-        isDeleting = true;
-        typeDelay = 1500; // Pause at the end of the word
-      } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        wordIndex = (wordIndex + 1) % words.length;
-        typeDelay = 500; // Pause before typing the next word
-      }
-
-      setTimeout(typeAnimation, typeDelay);
-    };
-
-    // Trigger typing loop
-    setTimeout(typeAnimation, 1000);
-  }
-
-  /* --------------------------------------------------------------------------
-     8. Scroll Reveal Animation using IntersectionObserver
-     -------------------------------------------------------------------------- */
-  const revealItems = document.querySelectorAll('.reveal-item');
-  
-  if ('IntersectionObserver' in window) {
-    const revealObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('revealed');
-          observer.unobserve(entry.target); // Animation triggers only once
-        }
-      });
-    }, {
-      root: null,
-      threshold: 0.12, // Elements start fading when 12% in viewport
-      rootMargin: '0px 0px -50px 0px' // Offset trigger point slightly from bottom edge
-    });
-
-    revealItems.forEach(item => {
-      revealObserver.observe(item);
-    });
+  const length = formattedInput.length;
+  if (length > 18) {
+    currentValEl.style.fontSize = "1.3rem";
+  } else if (length > 14) {
+    currentValEl.style.fontSize = "1.6rem";
+  } else if (length > 10) {
+    currentValEl.style.fontSize = "2rem";
   } else {
-    // Fallback if IntersectionObserver is not supported
-    revealItems.forEach(item => item.classList.add('revealed'));
+    currentValEl.style.fontSize = "2.5rem";
   }
 
-  /* --------------------------------------------------------------------------
-     9. Counters Animation (About Section Statistics)
-     -------------------------------------------------------------------------- */
-  const counters = document.querySelectorAll('.counter-number');
+  currentValEl.classList.remove("calc-updated");
+  void currentValEl.offsetWidth; 
+  currentValEl.classList.add("calc-updated");
+}
+
+// --- ARITHMETIC CORE ---
+function performMath(num1, num2, operator) {
+  const n1 = parseFloat(num1);
+  const n2 = parseFloat(num2);
+  if (isNaN(n1) || isNaN(n2)) return "Error";
   
-  const startCounting = (counter) => {
-    const target = parseFloat(counter.getAttribute('data-target'));
-    const suffix = counter.getAttribute('data-suffix') || '';
-    const isDecimal = counter.getAttribute('data-decimal') === 'true';
-    const scale = parseFloat(counter.getAttribute('data-scale')) || 1;
+  switch (operator) {
+    case "+": return n1 + n2;
+    case "−":
+    case "-": return n1 - n2;
+    case "×":
+    case "*": return n1 * n2;
+    case "÷":
+    case "/": 
+      return n2 === 0 ? "Cannot divide by zero" : n1 / n2;
+    default: return n2;
+  }
+}
+
+// --- BUTTON TRIGGERS & ACTIONS ---
+function handleDigit(digit) {
+  if (isEvaluated) {
+    currentInput = "";
+    prevOpText = "";
+    isEvaluated = false;
+  }
+
+  if (currentInput === "0" && digit !== ".") {
+    currentInput = digit;
+  } else if (digit === "." && currentInput.includes(".")) {
+    return;
+  } else {
+    if (currentInput.replace(/[.-]/g, "").length >= 15) return;
+    currentInput += digit;
+  }
+  updateDisplay();
+}
+
+function handleOperator(op) {
+  if (currentInput === "Cannot divide by zero" || currentInput === "Error") return;
+  
+  isEvaluated = false;
+  
+  if (currentInput !== "") {
+    if (storedVal !== null && pendingOp !== "") {
+      const result = performMath(storedVal, currentInput, pendingOp);
+      if (result === "Cannot divide by zero") {
+        triggerError("Cannot divide by zero");
+        return;
+      }
+      storedVal = result;
+    } else {
+      storedVal = parseFloat(currentInput);
+    }
+    currentInput = "";
+  }
+  
+  pendingOp = op;
+  prevOpText = `${formatNumber(storedVal)} ${pendingOp}`;
+  updateDisplay();
+}
+
+function handlePercent() {
+  if (currentInput === "Cannot divide by zero" || currentInput === "Error") return;
+
+  if (currentInput !== "") {
+    currentInput = (parseFloat(currentInput) / 100).toString();
+  } else if (storedVal !== null) {
+    storedVal = storedVal / 100;
+    prevOpText = formatNumber(storedVal);
+  }
+  updateDisplay();
+}
+
+function handleToggleSign() {
+  if (currentInput === "Cannot divide by zero" || currentInput === "Error") return;
+
+  if (currentInput !== "" && currentInput !== "0") {
+    if (currentInput.startsWith("-")) {
+      currentInput = currentInput.substring(1);
+    } else {
+      currentInput = "-" + currentInput;
+    }
+  } else if (storedVal !== null && storedVal !== 0) {
+    storedVal = -storedVal;
+    if (isEvaluated) {
+      prevOpText = `negate(${formatNumber(-storedVal)})`;
+    }
+  }
+  updateDisplay();
+}
+
+function handleCalculate() {
+  if (pendingOp === "" || currentInput === "") return;
+  
+  const operand1 = storedVal;
+  const operand2 = currentInput;
+  const result = performMath(operand1, operand2, pendingOp);
+  
+  if (result === "Cannot divide by zero") {
+    triggerError("Cannot divide by zero");
+    return;
+  }
+  
+  const expression = `${formatNumber(operand1)} ${pendingOp} ${formatNumber(operand2)}`;
+  prevOpText = `${expression} =`;
+  
+  saveToHistory(expression, formatNumber(result));
+  speakText(`Result is ${formatNumber(result)}`);
+  
+  storedVal = result;
+  currentInput = result.toString();
+  pendingOp = "";
+  isEvaluated = true;
+  updateDisplay();
+}
+
+function handleDelete() {
+  if (isEvaluated) {
+    prevOpText = "";
+    isEvaluated = false;
+  }
+  
+  if (currentInput === "Cannot divide by zero" || currentInput === "Error") {
+    currentInput = "0";
+  } else if (currentInput.length > 1) {
+    currentInput = currentInput.slice(0, -1);
+    if (currentInput === "-") currentInput = "0";
+  } else {
+    currentInput = "0";
+  }
+  updateDisplay();
+}
+
+function handleClear() {
+  currentInput = "0";
+  storedVal = null;
+  pendingOp = "";
+  prevOpText = "";
+  isEvaluated = false;
+  updateDisplay();
+}
+
+function triggerError(message) {
+  currentInput = message;
+  storedVal = null;
+  pendingOp = "";
+  prevOpText = "";
+  isEvaluated = true;
+  updateDisplay();
+}
+
+// --- RIPPLE EFFECTS ---
+function createRipple(event, button) {
+  const circle = document.createElement("span");
+  const dialogue = button.getBoundingClientRect();
+  const diameter = Math.max(dialogue.width, dialogue.height);
+  const radius = diameter / 2;
+
+  circle.style.width = circle.style.height = `${diameter}px`;
+  
+  if (event.clientX) {
+    circle.style.left = `${event.clientX - dialogue.left - radius}px`;
+    circle.style.top = `${event.clientY - dialogue.top - radius}px`;
+  } else {
+    circle.style.left = `${dialogue.width / 2 - radius}px`;
+    circle.style.top = `${dialogue.height / 2 - radius}px`;
+  }
+  
+  circle.classList.add("ripple");
+  
+  const priorRipple = button.querySelector(".ripple");
+  if (priorRipple) {
+    priorRipple.remove();
+  }
+  
+  button.appendChild(circle);
+}
+
+// --- KEYPAD DELEGATOR ---
+keypad.addEventListener("click", (e) => {
+  const key = e.target.closest(".key");
+  if (!key) return;
+
+  const char = key.dataset.char;
+  const action = key.dataset.action;
+
+  let soundType = "default";
+  if (action === "calculate") soundType = "equals";
+  else if (action === "clear" || action === "delete") soundType = "clear";
+  else if (key.classList.contains("key-op")) soundType = "op";
+
+  playClickSound(soundType);
+  createRipple(e, key);
+
+  if (char) {
+    if (!isNaN(Number(char)) || char === ".") {
+      handleDigit(char);
+    } else if (char === "%") {
+      handlePercent();
+    } else {
+      handleOperator(char);
+    }
+  } else if (action) {
+    switch (action) {
+      case "clear": handleClear(); break;
+      case "delete": handleDelete(); break;
+      case "toggle-sign": handleToggleSign(); break;
+      case "calculate": handleCalculate(); break;
+    }
+  }
+});
+
+// --- KEYBOARD ACCESSIBILITY CONTROLS ---
+document.addEventListener("keydown", (e) => {
+  if (e.key === "/" || e.key === "Backspace" || e.key === "Enter" || e.key === "Escape") {
+    e.preventDefault();
+  }
+
+  let buttonToAnimate = null;
+
+  if (!isNaN(Number(e.key))) {
+    handleDigit(e.key);
+    buttonToAnimate = document.querySelector(`.key[data-char="${e.key}"]`);
+    playClickSound("default");
+  } else {
+    switch (e.key) {
+      case ".":
+        handleDigit(".");
+        buttonToAnimate = document.querySelector('.key[data-char="."]');
+        playClickSound("default");
+        break;
+      case "+":
+        handleOperator("+");
+        buttonToAnimate = document.querySelector('.key[data-char="+"]');
+        playClickSound("op");
+        break;
+      case "-":
+        handleOperator("−");
+        buttonToAnimate = document.querySelector('.key[data-char="−"]');
+        playClickSound("op");
+        break;
+      case "*":
+        handleOperator("×");
+        buttonToAnimate = document.querySelector('.key[data-char="×"]');
+        playClickSound("op");
+        break;
+      case "/":
+        handleOperator("÷");
+        buttonToAnimate = document.querySelector('.key[data-char="÷"]');
+        playClickSound("op");
+        break;
+      case "%":
+        handlePercent();
+        buttonToAnimate = document.querySelector('.key[data-char="%"]');
+        playClickSound("op");
+        break;
+      case "Enter":
+      case "=":
+        handleCalculate();
+        buttonToAnimate = document.querySelector('.key-equals');
+        playClickSound("equals");
+        break;
+      case "Backspace":
+        handleDelete();
+        buttonToAnimate = document.querySelector('.key[data-action="delete"]');
+        playClickSound("clear");
+        break;
+      case "Escape":
+        handleClear();
+        buttonToAnimate = document.querySelector('.key[data-action="clear"]');
+        playClickSound("clear");
+        break;
+    }
+  }
+
+  if (buttonToAnimate) {
+    createRipple(e, buttonToAnimate);
+    buttonToAnimate.classList.add("btn-key-active");
+    buttonToAnimate.style.transform = "translateY(1px)";
+    buttonToAnimate.style.background = "var(--btn-active-bg)";
     
-    let count = 0;
-    const duration = 2000; // Total duration in ms
-    const frameRate = 1000 / 60; // 60 FPS
-    const totalFrames = Math.round(duration / frameRate);
-    let currentFrame = 0;
+    setTimeout(() => {
+      buttonToAnimate.classList.remove("btn-key-active");
+      buttonToAnimate.style.transform = "";
+      buttonToAnimate.style.background = "";
+    }, 120);
+  }
+});
 
-    const updateCounter = () => {
-      currentFrame++;
-      
-      // Easing function (easeOutQuad)
-      const progress = currentFrame / totalFrames;
-      const easeProgress = progress * (2 - progress);
-      
-      const currentValue = easeProgress * target;
+// --- SETTINGS (THEME, SOUND, DRAWERS) ---
 
-      if (isDecimal) {
-        counter.textContent = currentValue.toFixed(1) + suffix;
-      } else {
-        if (scale > 1) {
-          // Format scales like Millions (e.g. 1M+)
-          const scaledValue = currentValue / scale;
-          counter.textContent = scaledValue.toFixed(1) + suffix;
-        } else {
-          // Format integers nicely with commas if needed
-          const integerVal = Math.floor(currentValue);
-          counter.textContent = integerVal.toLocaleString() + suffix;
-        }
-      }
+// Initialize Select Elements
+themeSelect.value = theme;
+document.body.setAttribute("data-theme", theme);
 
-      if (currentFrame < totalFrames) {
-        requestAnimationFrame(updateCounter);
-      } else {
-        // Guarantee target value is exact at the end
-        if (isDecimal) {
-          counter.textContent = target.toFixed(1) + suffix;
-        } else {
-          if (scale > 1) {
-            counter.textContent = (target / scale).toFixed(1) + suffix;
-          } else {
-            counter.textContent = target.toLocaleString() + suffix;
-          }
-        }
-      }
-    };
+soundSelect.value = soundProfile;
 
-    requestAnimationFrame(updateCounter);
-  };
+if (speechReadoutEnabled) {
+  voiceSpeakToggleBtn.classList.add("active");
+  voiceSpeakToggleBtn.setAttribute("data-tooltip", "Speech On");
+}
 
-  if ('IntersectionObserver' in window) {
-    const countersObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          startCounting(entry.target);
-          observer.unobserve(entry.target);
-        }
-      });
-    }, {
-      threshold: 0.5
-    });
+// Theme Dropdown Change
+themeSelect.addEventListener("change", (e) => {
+  theme = themeSelect.value;
+  document.body.setAttribute("data-theme", theme);
+  localStorage.setItem("theme", theme);
+  playClickSound("default");
+});
 
-    counters.forEach(counter => {
-      countersObserver.observe(counter);
-    });
+// Sound Profile Dropdown Change
+soundSelect.addEventListener("change", (e) => {
+  soundProfile = soundSelect.value;
+  localStorage.setItem("soundProfile", soundProfile);
+  playClickSound("default");
+});
+
+// Voice Speak Toggle
+voiceSpeakToggleBtn.addEventListener("click", (e) => {
+  initAudio();
+  createRipple(e, voiceSpeakToggleBtn);
+  speechReadoutEnabled = !speechReadoutEnabled;
+  localStorage.setItem("speechReadout", speechReadoutEnabled);
+  
+  if (speechReadoutEnabled) {
+    voiceSpeakToggleBtn.classList.add("active");
+    voiceSpeakToggleBtn.setAttribute("data-tooltip", "Speech On");
+    speakText("Voice readout active");
   } else {
-    // Fallback instantly displaying final stats
-    counters.forEach(counter => {
-      const target = counter.getAttribute('data-target');
-      const suffix = counter.getAttribute('data-suffix') || '';
-      counter.textContent = target + suffix;
-    });
+    voiceSpeakToggleBtn.classList.remove("active");
+    voiceSpeakToggleBtn.setAttribute("data-tooltip", "Speech Off");
+    if (window.speechSynthesis) window.speechSynthesis.cancel();
   }
+  playClickSound("default");
+});
 
-  /* --------------------------------------------------------------------------
-     10. Pricing Plans Billing Toggle (Monthly / Annual)
-     -------------------------------------------------------------------------- */
-  const pricingToggleBtn = document.getElementById('pricing-toggle');
-  const toggleMonthly = document.getElementById('toggle-monthly');
-  const toggleAnnual = document.getElementById('toggle-annual');
-  const priceValues = document.querySelectorAll('.price-val');
-
-  if (pricingToggleBtn) {
-    pricingToggleBtn.addEventListener('click', () => {
-      const isAnnual = pricingToggleBtn.classList.toggle('annual');
-      
-      if (isAnnual) {
-        toggleMonthly.classList.remove('active');
-        toggleAnnual.classList.add('active');
-      } else {
-        toggleMonthly.classList.add('active');
-        toggleAnnual.classList.remove('active');
-      }
-
-      // Animate price updates
-      priceValues.forEach(val => {
-        // Brief scale down transition
-        val.style.transform = 'scale(0.85)';
-        val.style.opacity = '0.5';
-        
-        setTimeout(() => {
-          const newPrice = isAnnual ? val.getAttribute('data-annual') : val.getAttribute('data-monthly');
-          val.textContent = newPrice;
-          val.style.transform = 'scale(1)';
-          val.style.opacity = '1';
-        }, 150);
-      });
-    });
+// Solvers Drawer Toggle
+solversToggleBtn.addEventListener("click", (e) => {
+  initAudio();
+  playClickSound("default");
+  createRipple(e, solversToggleBtn);
+  
+  solversPanel.classList.toggle("collapsed");
+  // Close opposite drawer if open to keep spacing clean
+  if (!solversPanel.classList.contains("collapsed")) {
+    historyPanel.classList.add("collapsed");
   }
+});
 
-  /* --------------------------------------------------------------------------
-     11. FAQ Accordion Animation
-     -------------------------------------------------------------------------- */
-  const faqTriggers = document.querySelectorAll('.faq-trigger');
+// History Drawer Toggle
+historyToggleBtn.addEventListener("click", (e) => {
+  initAudio();
+  playClickSound("default");
+  createRipple(e, historyToggleBtn);
+  
+  historyPanel.classList.toggle("collapsed");
+  if (!historyPanel.classList.contains("collapsed")) {
+    solversPanel.classList.add("collapsed");
+  }
+});
 
-  faqTriggers.forEach(trigger => {
-    trigger.addEventListener('click', () => {
-      const item = trigger.parentElement;
-      const isOpen = item.classList.contains('open');
-      const content = item.querySelector('.faq-content');
+// Clipboard result copy action
+copyResultBtn.addEventListener("click", (e) => {
+  initAudio();
+  playClickSound("default");
+  createRipple(e, copyResultBtn);
 
-      // Close all open FAQ items first
-      document.querySelectorAll('.faq-item.open').forEach(openItem => {
-        if (openItem !== item) {
-          openItem.classList.remove('open');
-          openItem.querySelector('.faq-content').style.maxHeight = '0px';
-          openItem.querySelector('.faq-trigger').setAttribute('aria-expanded', 'false');
-        }
-      });
+  const textToCopy = currentValEl.textContent;
+  if (!textToCopy || textToCopy === "0" || textToCopy === "Cannot divide by zero" || textToCopy === "Error") return;
 
-      // Toggle state of selected item
-      if (isOpen) {
-        item.classList.remove('open');
-        content.style.maxHeight = '0px';
-        trigger.setAttribute('aria-expanded', 'false');
-      } else {
-        item.classList.add('open');
-        content.style.maxHeight = `${content.scrollHeight}px`;
-        trigger.setAttribute('aria-expanded', 'true');
+  navigator.clipboard.writeText(textToCopy.replace(/,/g, ""))
+    .then(() => {
+      copyToast.classList.add("show");
+      setTimeout(() => {
+        copyToast.classList.remove("show");
+      }, 2000);
+    })
+    .catch(err => {
+      console.error("Clipboard copy failed: ", err);
+    });
+});
+
+// --- HISTORICAL LOG LOGIC ---
+function saveToHistory(expr, result) {
+  history.unshift({ expr, result });
+  if (history.length > 50) history.pop();
+  localStorage.setItem("calcHistory", JSON.stringify(history));
+  renderHistory();
+}
+
+function renderHistory() {
+  historyList.innerHTML = "";
+  
+  if (history.length === 0) {
+    historyList.innerHTML = '<div class="history-empty">No calculations yet</div>';
+    return;
+  }
+  
+  history.forEach((item, index) => {
+    const historyItem = document.createElement("div");
+    historyItem.classList.add("history-item");
+    historyItem.setAttribute("data-index", index);
+    historyItem.setAttribute("role", "button");
+    historyItem.setAttribute("tabindex", "0");
+    
+    historyItem.innerHTML = `
+      <div class="history-expr">${item.expr}</div>
+      <div class="history-result">${item.result}</div>
+    `;
+    
+    historyItem.addEventListener("click", (e) => {
+      initAudio();
+      playClickSound("default");
+      currentInput = item.result.replace(/,/g, "");
+      isEvaluated = true;
+      updateDisplay();
+    });
+
+    historyItem.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        historyItem.click();
       }
     });
+
+    historyList.appendChild(historyItem);
   });
+}
 
-  /* --------------------------------------------------------------------------
-     12. Modern Contact Form Handler & Submission
-     -------------------------------------------------------------------------- */
-  const contactForm = document.getElementById('contact-form');
-  const submitBtn = document.getElementById('contact-submit-btn');
-  const formStatus = document.getElementById('form-status');
+clearHistoryBtn.addEventListener("click", (e) => {
+  initAudio();
+  playClickSound("clear");
+  createRipple(e, clearHistoryBtn);
+  
+  history = [];
+  localStorage.setItem("calcHistory", JSON.stringify(history));
+  renderHistory();
+});
 
-  if (contactForm && submitBtn && formStatus) {
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      
-      // Perform simple validation
-      const nameVal = document.getElementById('contact-name').value.trim();
-      const emailVal = document.getElementById('contact-email').value.trim();
-      const msgVal = document.getElementById('contact-message').value.trim();
+// --- SMART MATHEMATICAL SOLVERS LOGIC ---
 
-      if (!nameVal || !emailVal || !msgVal) {
-        formStatus.textContent = "Please fill in all fields.";
-        formStatus.className = "form-status-msg error";
-        return;
-      }
+// Solver Select change template toggling
+solverSelect.addEventListener("change", () => {
+  const selected = solverSelect.value;
+  
+  Object.keys(solverForms).forEach(key => {
+    if (key === selected) {
+      solverForms[key].style.display = "flex";
+    } else {
+      solverForms[key].style.display = "none";
+    }
+  });
+  playClickSound("default");
+});
 
-      // Check email regex
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(emailVal)) {
-        formStatus.textContent = "Please enter a valid email address.";
-        formStatus.className = "form-status-msg error";
-        return;
-      }
+// 1. Bill Splitter Calculator
+btnSolveSplit.addEventListener("click", () => {
+  const bill = parseFloat(billAmtInput.value) || 0;
+  const tipPct = parseFloat(tipPctInput.value) || 0;
+  const people = parseInt(splitPeopleInput.value) || 1;
+  
+  if (bill <= 0 || people <= 0) return;
+  
+  const tipTotal = bill * (tipPct / 100);
+  const totalBill = bill + tipTotal;
+  
+  const tipPerPerson = tipTotal / people;
+  const totalPerPerson = totalBill / people;
+  
+  valTipTotal.textContent = `$${tipTotal.toFixed(2)}`;
+  valTipPer.textContent = `$${tipPerPerson.toFixed(2)}`;
+  valTotalPer.textContent = `$${totalPerPerson.toFixed(2)}`;
+  
+  resultSplitBox.style.display = "block";
+  playClickSound("equals");
+});
 
-      // Disable button and show sending feedback
-      submitBtn.disabled = true;
-      const originalBtnText = submitBtn.innerHTML;
-      submitBtn.innerHTML = `<span>Sending Message...</span> <i data-lucide="loader-2" class="spin-icon"></i>`;
-      if (typeof lucide !== 'undefined') {
-        lucide.createIcons(); // Initialize the loader icon
-      }
-      formStatus.textContent = "";
+loadbackSplit.addEventListener("click", () => {
+  const val = valTotalPer.textContent.replace("$", "");
+  currentInput = val;
+  isEvaluated = true;
+  updateDisplay();
+  playClickSound("default");
+});
 
-      // Simulate network latency (1.5 seconds)
-      setTimeout(() => {
-        formStatus.textContent = "Message sent successfully! We will get back to you shortly.";
-        formStatus.className = "form-status-msg success";
-        
-        // Reset form inputs
-        contactForm.reset();
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = originalBtnText;
-        if (typeof lucide !== 'undefined') {
-          lucide.createIcons(); // Re-initialize original icon
-        }
+// 2. BMI Calculator
+btnSolveBmi.addEventListener("click", () => {
+  const weight = parseFloat(bmiWeightInput.value) || 0;
+  const height = parseFloat(bmiHeightInput.value) || 0;
+  
+  if (weight <= 0 || height <= 0) return;
+  
+  // BMI formula: kg / m^2
+  const heightM = height / 100;
+  const bmi = weight / (heightM * heightM);
+  
+  let classification = "";
+  if (bmi < 18.5) classification = "Underweight";
+  else if (bmi < 25) classification = "Normal";
+  else if (bmi < 30) classification = "Overweight";
+  else classification = "Obese";
+  
+  valBmiScore.textContent = bmi.toFixed(1);
+  valBmiClass.textContent = classification;
+  
+  resultBmiBox.style.display = "block";
+  playClickSound("equals");
+});
 
-        // Auto-clear success message after 5 seconds
-        setTimeout(() => {
-          formStatus.textContent = "";
-        }, 5000);
-      }, 1500);
-    });
-  }
+loadbackBmi.addEventListener("click", () => {
+  currentInput = valBmiScore.textContent;
+  isEvaluated = true;
+  updateDisplay();
+  playClickSound("default");
+});
 
-  /* --------------------------------------------------------------------------
-     13. Newsletter Form Handler & Submission
-     -------------------------------------------------------------------------- */
-  const newsletterForm = document.getElementById('newsletter-form');
-  const newsletterStatus = document.getElementById('newsletter-status');
+// 3. Pythagoras Hypotenuse Solver
+btnSolvePyth.addEventListener("click", () => {
+  const a = parseFloat(pythAInput.value) || 0;
+  const b = parseFloat(pythBInput.value) || 0;
+  
+  if (a <= 0 || b <= 0) return;
+  
+  // c = sqrt(a^2 + b^2)
+  const c = Math.sqrt(a*a + b*b);
+  
+  valPythC.textContent = c.toFixed(3);
+  resultPythBox.style.display = "block";
+  playClickSound("equals");
+});
 
-  if (newsletterForm && newsletterStatus) {
-    newsletterForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const emailInput = document.getElementById('newsletter-email');
-      const emailVal = emailInput.value.trim();
+loadbackPyth.addEventListener("click", () => {
+  currentInput = valPythC.textContent;
+  isEvaluated = true;
+  updateDisplay();
+  playClickSound("default");
+});
 
-      if (!emailVal) return;
-
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(emailVal)) {
-        newsletterStatus.textContent = "Invalid email address.";
-        newsletterStatus.className = "newsletter-status error";
-        return;
-      }
-
-      newsletterStatus.textContent = "Subscribed successfully!";
-      newsletterStatus.className = "newsletter-status success";
-      emailInput.value = "";
-
-      setTimeout(() => {
-        newsletterStatus.textContent = "";
-      }, 4000);
-    });
-  }
+// --- INITIAL LOADING SCREEN FADEOUT ---
+window.addEventListener("DOMContentLoaded", () => {
+  renderHistory();
+  updateDisplay();
+  
+  setTimeout(() => {
+    loadingScreen.classList.add("fade-out");
+  }, 800);
 });

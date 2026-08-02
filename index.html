@@ -1,0 +1,838 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sindhi Prince | Aspiring Frontend Web Developer Portfolio</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Professional portfolio of Sindhi Prince - Aspiring Frontend Web Developer, BCA student at Sankalchand Patel University." />
+    <meta name="keywords" content="Sindhi Prince, Frontend Developer, BCA Student, Portfolio, Web Developer, JavaScript, CSS, HTML5, Responsive Design, Sankalchand Patel University" />
+    <meta name="author" content="Sindhi Prince" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Sindhi Prince | Aspiring Frontend Web Developer Portfolio" />
+    <meta property="og:description" content="Professional portfolio of Sindhi Prince - Aspiring Frontend Web Developer and BCA Student." />
+    <meta property="og:image" content="assets/avatar.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="Sindhi Prince | Aspiring Frontend Web Developer Portfolio" />
+    <meta property="twitter:description" content="Professional portfolio of Sindhi Prince - Aspiring Frontend Web Developer and BCA Student." />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader" class="preloader">
+        <div class="preloader-blur"></div>
+        <div class="preloader-content">
+            <div class="preloader-logo">
+                <span class="logo-accent">&lt;</span>SP<span class="logo-accent">/&gt;</span
+          >
+        </div>
+        <div class="preloader-progress-container">
+          <div class="preloader-progress-bar" id="preloader-bar"></div>
+        </div>
+        <div class="preloader-percentage" id="preloader-percentage">0%</div>
+      </div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress-bar" id="scroll-progress"></div>
+
+    <!-- Background Decoration Grid & Glowing Orbs -->
+    <div class="grid-overlay"></div>
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <div class="glow-orb orb-3"></div>
+
+    <!-- Header / Navbar -->
+    <header class="header" id="header">
+      <div class="nav-container">
+        <a href="#home" class="logo" id="logo-nav">
+          <span class="logo-accent">&lt;</span>Sindhi<span>Prince</span
+          ><span class="logo-accent">/&gt;</span>
+                </a>
+
+                <nav class="nav-menu" id="nav-menu">
+                    <ul class="nav-list">
+                        <li>
+                            <a href="#home" class="nav-link active" id="nav-home">Home</a>
+                        </li>
+                        <li><a href="#about" class="nav-link" id="nav-about">About</a></li>
+                        <li>
+                            <a href="#skills" class="nav-link" id="nav-skills">Skills</a>
+                        </li>
+                        <li>
+                            <a href="#projects" class="nav-link" id="nav-projects">Projects</a
+              >
+            </li>
+            <li>
+              <a href="#resume" class="nav-link" id="nav-resume">Resume</a>
+                        </li>
+                        <li>
+                            <a href="#contact" class="nav-link" id="nav-contact">Contact</a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <div class="nav-actions">
+                    <a href="#contact" class="btn btn-primary btn-nav" id="btn-hire">Hire Me</a
+          >
+          <button
+            class="nav-toggle"
+            id="nav-toggle"
+            aria-label="Toggle navigation menu"
+          >
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero Section -->
+      <section class="hero-section section-padding" id="home">
+        <div class="container hero-container">
+          <div class="hero-content reveal-up">
+            <div class="badge-container">
+              <span class="badge"
+                ><i data-lucide="terminal" class="badge-icon"></i> Open to
+                Internships</span
+              >
+            </div>
+            <h1 class="hero-title">
+              Hi, I'm <span class="gradient-text">Sindhi Prince</span>
+            </h1>
+            <h2 class="hero-subtitle">
+              I am a <span class="typing-text" id="typing-text"></span
+              ><span class="typed-cursor">|</span>
+            </h2>
+            <p class="hero-description">
+              Crafting beautiful, responsive, and user-friendly web experiences
+              through clean code and continuous learning.
+            </p>
+            <div class="hero-buttons">
+              <a href="#resume" class="btn btn-primary" id="hero-btn-resume">
+                <span>Download Resume</span>
+                <i data-lucide="download" class="btn-icon"></i>
+              </a>
+                    <a href="#contact" class="btn btn-secondary" id="hero-btn-contact">
+                        <span>Contact Me</span>
+                        <i data-lucide="arrow-right" class="btn-icon"></i>
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-num-container">
+                            <span class="stat-number" data-target="3">0</span>
+                        </div>
+                        <span class="stat-label">Learning Projects</span>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-num-container">
+                            <span class="stat-number" data-target="10">0</span
+                  ><span class="stat-plus">+</span>
+                        </div>
+                        <span class="stat-label">Tech Skills</span>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-num-container">
+                            <span class="stat-number" data-target="500">0</span
+                  ><span class="stat-plus">+</span>
+                        </div>
+                        <span class="stat-label">Learning Hours</span>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-num-container">
+                            <span class="stat-number" data-target="100">0</span
+                  ><span class="stat-plus">%</span>
+                        </div>
+                        <span class="stat-label">Coding Passion</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-image-container reveal-scale">
+                <div class="hero-image-wrapper">
+                    <div class="hero-image-glowing-backdrop"></div>
+                    <img src="assets/avatar.png" alt="Sindhi Prince - Profile Image" class="hero-profile-image" id="hero-avatar" />
+                    <div class="tech-tag tag-js float-anim-1">
+                        <i data-lucide="code-2"></i><span>JS</span>
+                    </div>
+                    <div class="tech-tag tag-react float-anim-2">
+                        <i data-lucide="atom"></i><span>React</span>
+                    </div>
+                    <div class="tech-tag tag-design float-anim-3">
+                        <i data-lucide="figma"></i><span>UI/UX</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a href="#about" class="scroll-down-indicator" aria-label="Scroll to About Me section">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+            <span>Scroll Down</span>
+        </a>
+        </section>
+
+        <!-- About Me Section -->
+        <section class="about-section section-padding" id="about">
+            <div class="container">
+                <div class="section-header reveal-up">
+                    <h2 class="section-title">
+                        About <span class="gradient-text">Me</span>
+                    </h2>
+                    <p class="section-subtitle">
+                        My education, professional journey, and who I am
+                    </p>
+                </div>
+
+                <div class="about-grid">
+                    <div class="about-image-column reveal-left">
+                        <div class="about-image-card">
+                            <img src="assets/avatar.png" alt="Sindhi Prince Professional Portrait" class="about-image" id="about-avatar" />
+                            <div class="experience-badge">
+                                <span class="badge-num">BCA</span>
+                                <span class="badge-txt">Student</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="about-content-column reveal-right">
+                        <h3 class="about-heading">
+                            Transforming Ideas into Digital Realities
+                        </h3>
+                        <p class="about-bio">
+                            I am a passionate BCA student at Sankalchand Patel University with a strong interest in Frontend Web Development. I enjoy building visually appealing, responsive, and user-friendly websites using HTML, CSS, and JavaScript.
+                        </p>
+                        <p class="about-bio">
+                            I continuously improve my technical skills through learning and practical implementation. My long-term goal is to become a skilled Full Stack Developer and contribute to innovative technology solutions.
+                        </p>
+
+                        <div class="about-cards-grid">
+                            <div class="info-card">
+                                <i data-lucide="graduation-cap" class="card-icon"></i>
+                                <h4>Education</h4>
+                                <p>Bachelor of Computer Applications (BCA)</p>
+                                <span class="card-sub">Sankalchand Patel University (2024 - 2027)</span
+                  >
+                </div>
+
+                <div class="info-card">
+                  <i data-lucide="target" class="card-icon"></i>
+                  <h4>Career Goal</h4>
+                  <p>
+                    I aim to build a successful career in Web Development by
+                    continuously learning modern technologies, creating
+                    high-quality projects, and contributing to innovative
+                    software solutions.
+                  </p>
+                </div>
+              </div>
+
+              <div class="personal-info-row">
+                <div class="info-item">
+                  <span class="info-label">Name:</span>
+                                <span class="info-value">Sindhi Prince</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">College:</span>
+                                <span class="info-value">Sankalchand Patel University</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Course:</span>
+                                <span class="info-value">BCA</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Duration:</span>
+                                <span class="info-value">2024 – 2027</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Location:</span>
+                                <span class="info-value">Patan, Gujarat, India</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Email:</span>
+                                <span class="info-value">princesindhi40@gmail.com</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Phone:</span>
+                                <span class="info-value">+91 9510668161</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="skills-section section-padding" id="skills">
+            <div class="container">
+                <div class="section-header reveal-up">
+                    <h2 class="section-title">
+                        My <span class="gradient-text">Skills</span>
+                    </h2>
+                    <p class="section-subtitle">
+                        The technological tools and stack I use to build premium websites
+                    </p>
+                </div>
+
+                <div class="skills-grid">
+                    <!-- HTML5 Card -->
+                    <div class="skill-card reveal-up">
+                        <div class="skill-icon-wrapper html-color">
+                            <i data-lucide="file-code-2"></i>
+                        </div>
+                        <div class="skill-info">
+                            <div class="skill-header">
+                                <span class="skill-name">HTML5</span>
+                                <span class="skill-percentage" data-val="90">0%</span>
+                            </div>
+                            <div class="skill-progress-bg">
+                                <div class="skill-progress-bar" style="--width: 90%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CSS3 Card -->
+                    <div class="skill-card reveal-up">
+                        <div class="skill-icon-wrapper css-color">
+                            <i data-lucide="palette"></i>
+                        </div>
+                        <div class="skill-info">
+                            <div class="skill-header">
+                                <span class="skill-name">CSS3</span>
+                                <span class="skill-percentage" data-val="85">0%</span>
+                            </div>
+                            <div class="skill-progress-bg">
+                                <div class="skill-progress-bar" style="--width: 85%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- JavaScript Card -->
+                    <div class="skill-card reveal-up">
+                        <div class="skill-icon-wrapper js-color">
+                            <i data-lucide="braces"></i>
+                        </div>
+                        <div class="skill-info">
+                            <div class="skill-header">
+                                <span class="skill-name">JavaScript</span>
+                                <span class="skill-percentage" data-val="75">0%</span>
+                            </div>
+                            <div class="skill-progress-bg">
+                                <div class="skill-progress-bar" style="--width: 75%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Responsive Design Card -->
+                    <div class="skill-card reveal-up">
+                        <div class="skill-icon-wrapper resp-color">
+                            <i data-lucide="smartphone"></i>
+                        </div>
+                        <div class="skill-info">
+                            <div class="skill-header">
+                                <span class="skill-name">Responsive Web Design</span>
+                                <span class="skill-percentage" data-val="85">0%</span>
+                            </div>
+                            <div class="skill-progress-bg">
+                                <div class="skill-progress-bar" style="--width: 85%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bootstrap Card -->
+                    <div class="skill-card reveal-up">
+                        <div class="skill-icon-wrapper bs-color">
+                            <i data-lucide="layout-grid"></i>
+                        </div>
+                        <div class="skill-info">
+                            <div class="skill-header">
+                                <span class="skill-name">Bootstrap</span>
+                                <span class="skill-percentage" data-val="70">0%</span>
+                            </div>
+                            <div class="skill-progress-bg">
+                                <div class="skill-progress-bar" style="--width: 70%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Git Card -->
+                    <div class="skill-card reveal-up">
+                        <div class="skill-icon-wrapper git-color">
+                            <i data-lucide="git-branch"></i>
+                        </div>
+                        <div class="skill-info">
+                            <div class="skill-header">
+                                <span class="skill-name">Git</span>
+                                <span class="skill-percentage" data-val="65">0%</span>
+                            </div>
+                            <div class="skill-progress-bg">
+                                <div class="skill-progress-bar" style="--width: 65%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- GitHub Card -->
+                    <div class="skill-card reveal-up">
+                        <div class="skill-icon-wrapper github-color">
+                            <i data-lucide="github"></i>
+                        </div>
+                        <div class="skill-info">
+                            <div class="skill-header">
+                                <span class="skill-name">GitHub</span>
+                                <span class="skill-percentage" data-val="70">0%</span>
+                            </div>
+                            <div class="skill-progress-bg">
+                                <div class="skill-progress-bar" style="--width: 70%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Problem Solving Card -->
+                    <div class="skill-card reveal-up">
+                        <div class="skill-icon-wrapper ps-color">
+                            <i data-lucide="brain"></i>
+                        </div>
+                        <div class="skill-info">
+                            <div class="skill-header">
+                                <span class="skill-name">Problem Solving</span>
+                                <span class="skill-percentage" data-val="90">0%</span>
+                            </div>
+                            <div class="skill-progress-bg">
+                                <div class="skill-progress-bar" style="--width: 90%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- React Card -->
+                    <div class="skill-card reveal-up">
+                        <div class="skill-icon-wrapper react-color">
+                            <i data-lucide="atom"></i>
+                        </div>
+                        <div class="skill-info">
+                            <div class="skill-header">
+                                <span class="skill-name">Learning React</span>
+                                <span class="skill-percentage" data-val="35">0%</span>
+                            </div>
+                            <div class="skill-progress-bg">
+                                <div class="skill-progress-bar" style="--width: 35%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Node Card -->
+                    <div class="skill-card reveal-up">
+                        <div class="skill-icon-wrapper node-color">
+                            <i data-lucide="server"></i>
+                        </div>
+                        <div class="skill-info">
+                            <div class="skill-header">
+                                <span class="skill-name">Learning Node.js</span>
+                                <span class="skill-percentage" data-val="25">0%</span>
+                            </div>
+                            <div class="skill-progress-bg">
+                                <div class="skill-progress-bar" style="--width: 25%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section class="projects-section section-padding" id="projects">
+            <div class="container">
+                <div class="section-header reveal-up">
+                    <h2 class="section-title">
+                        My Learning <span class="gradient-text">Projects</span>
+                    </h2>
+                    <p class="section-subtitle">
+                        A timeline showcase of files and tasks during my web development journey
+                    </p>
+                </div>
+
+                <div class="projects-grid">
+                    <!-- Project 1 -->
+                    <article class="project-card reveal-up" id="project-card-1">
+                        <div class="project-image-wrapper">
+                            <img src="assets/project1.png" alt="Portfolio Website Project Mockup" class="project-img" />
+                            <div class="project-overlay">
+                                <div class="project-tags">
+                                    <span class="project-tag">HTML</span>
+                                    <span class="project-tag">CSS</span>
+                                    <span class="project-tag">JavaScript</span>
+                                </div>
+                                <span class="status-badge status-completed">Completed</span>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title">Portfolio Website</h3>
+                            <p class="project-desc">
+                                A responsive personal portfolio website developed using HTML, CSS, and JavaScript to showcase my skills, education, and future projects.
+                            </p>
+                            <div class="project-links">
+                                <a href="#" class="btn btn-sm btn-primary project-btn-live">
+                                    <span>Live Demo</span>
+                                    <i data-lucide="external-link"></i>
+                                </a>
+                                <a href="https://github.com/HackerxE16/HackerxE16" target="_blank" rel="noopener" class="btn btn-sm btn-secondary project-btn-git">
+                                    <span>GitHub</span>
+                                    <i data-lucide="github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 2 -->
+                    <article class="project-card reveal-up" id="project-card-2">
+                        <div class="project-image-wrapper">
+                            <img src="assets/project2.png" alt="SaaS Product Landing Page Mockup" class="project-img" />
+                            <div class="project-overlay">
+                                <div class="project-tags">
+                                    <span class="project-tag">HTML</span>
+                                    <span class="project-tag">CSS</span>
+                                </div>
+                                <span class="status-badge status-learning">Learning Project</span
+                  >
+                </div>
+              </div>
+              <div class="project-info">
+                <h3 class="project-title">Modern Landing Page</h3>
+                <p class="project-desc">
+                  A responsive landing page built while learning advanced
+                  layouts, Flexbox, Grid, animations, and UI design principles.
+                </p>
+                <div class="project-links">
+                  <a href="#" class="btn btn-sm btn-primary project-btn-live">
+                    <span>Live Demo</span>
+                                <i data-lucide="external-link"></i>
+                                </a>
+                                <a href="https://github.com/HackerxE16" target="_blank" rel="noopener" class="btn btn-sm btn-secondary project-btn-git">
+                                    <span>GitHub</span>
+                                    <i data-lucide="github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 3 -->
+                    <article class="project-card reveal-up" id="project-card-3">
+                        <div class="project-image-wrapper">
+                            <img src="assets/project3.png" alt="Glassmorphic Calculator UI Mockup" class="project-img" />
+                            <div class="project-overlay">
+                                <div class="project-tags">
+                                    <span class="project-tag">HTML</span>
+                                    <span class="project-tag">CSS</span>
+                                    <span class="project-tag">JavaScript</span>
+                                </div>
+                                <span class="status-badge status-learning">Learning Project</span
+                  >
+                </div>
+              </div>
+              <div class="project-info">
+                <h3 class="project-title">Calculator Application</h3>
+                <p class="project-desc">
+                  A calculator application built using HTML, CSS, and JavaScript
+                  to practice DOM manipulation, events, and JavaScript
+                  fundamentals.
+                </p>
+                <div class="project-links">
+                  <a href="#" class="btn btn-sm btn-primary project-btn-live">
+                    <span>Live Demo</span>
+                                <i data-lucide="external-link"></i>
+                                </a>
+                                <a href="https://github.com/HackerxE16" target="_blank" rel="noopener" class="btn btn-sm btn-secondary project-btn-git">
+                                    <span>GitHub</span>
+                                    <i data-lucide="github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resume Section -->
+        <section class="resume-section section-padding" id="resume">
+            <div class="container">
+                <div class="section-header reveal-up">
+                    <h2 class="section-title">
+                        My <span class="gradient-text">Resume</span>
+                    </h2>
+                    <p class="section-subtitle">
+                        A summary of my education, certificates, and coding accomplishments
+                    </p>
+                </div>
+
+                <div class="resume-container">
+                    <div class="resume-grid">
+                        <div class="timeline-column reveal-left">
+                            <h3 class="timeline-group-title">
+                                <i data-lucide="graduation-cap"></i> Education
+                            </h3>
+                            <div class="timeline">
+                                <div class="timeline-item">
+                                    <div class="timeline-dot"></div>
+                                    <span class="timeline-date">2024 - 2027</span>
+                                    <h4 class="timeline-title">
+                                        Bachelor of Computer Applications (BCA)
+                                    </h4>
+                                    <h5 class="timeline-company">
+                                        Sankalchand Patel University
+                                    </h5>
+                                    <p class="timeline-text">
+                                        Focusing on basic computing, databases, web technology foundations, and object-oriented architectures.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-column reveal-right">
+                            <h3 class="timeline-group-title">
+                                <i data-lucide="award"></i> Goals & Direction
+                            </h3>
+                            <div class="timeline">
+                                <div class="timeline-item">
+                                    <div class="timeline-dot"></div>
+                                    <span class="timeline-date">Continuous</span>
+                                    <h4 class="timeline-title">Frontend Engineering Focus</h4>
+                                    <h5 class="timeline-company">Self-Learning & Projects</h5>
+                                    <p class="timeline-text">
+                                        Dedication to building robust, accessible UIs. Learning layout frameworks and reactive models dynamically.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="resume-cta reveal-up">
+                        <div class="resume-card-box">
+                            <div class="resume-card-glow"></div>
+                            <div class="resume-card-icon">
+                                <i data-lucide="file-text"></i>
+                            </div>
+                            <div class="resume-card-info">
+                                <h3>Curriculum Vitae</h3>
+                                <p>
+                                    Interested in hiring me as an intern or junior web developer? Get my resume for more details.
+                                </p>
+                            </div>
+                            <a href="#" class="btn btn-primary" download id="btn-download-resume">
+                                <span>Download Resume</span>
+                                <i data-lucide="download"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section section-padding" id="contact">
+            <div class="container">
+                <div class="section-header reveal-up">
+                    <h2 class="section-title">
+                        Get In <span class="gradient-text">Touch</span>
+                    </h2>
+                    <p class="section-subtitle">
+                        Have an internship, project, or opportunity? Contact me today.
+                    </p>
+                </div>
+
+                <div class="contact-grid">
+                    <div class="contact-info-column reveal-left">
+                        <h3 class="contact-column-title">Contact Information</h3>
+                        <p class="contact-lead-text">
+                            Feel free to reach out via the form, directly by phone, or email. I usually respond within 24 hours.
+                        </p>
+
+                        <div class="contact-cards-stack">
+                            <!-- Phone -->
+                            <div class="contact-info-card">
+                                <div class="contact-icon-box">
+                                    <i data-lucide="phone"></i>
+                                </div>
+                                <div class="contact-card-text">
+                                    <span class="contact-label">Phone Number</span>
+                                    <a href="tel:+919510668161" class="contact-link" id="contact-phone">+91 9510668161</a
+                    >
+                  </div>
+                </div>
+
+                <!-- Email -->
+                <div class="contact-info-card">
+                  <div class="contact-icon-box">
+                    <i data-lucide="mail"></i>
+                  </div>
+                  <div class="contact-card-text">
+                    <span class="contact-label">Email Address</span>
+                    <a
+                      href="mailto:princesindhi40@gmail.com"
+                      class="contact-link"
+                      id="contact-email"
+                      >princesindhi40@gmail.com</a
+                    >
+                  </div>
+                </div>
+
+                <!-- Location -->
+                <div class="contact-info-card">
+                  <div class="contact-icon-box">
+                    <i data-lucide="map-pin"></i>
+                  </div>
+                  <div class="contact-card-text">
+                    <span class="contact-label">Location</span>
+                    <span class="contact-text-val" id="contact-location"
+                      >Patan, Gujarat, India</span
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="social-links-container">
+                <span class="social-title">Follow Me</span>
+                <div class="social-icons">
+                  <a
+                    href="https://github.com/HackerxE16"
+                    target="_blank"
+                    rel="noopener"
+                    aria-label="GitHub Profile"
+                    class="social-icon"
+                    id="social-git"
+                  >
+                    <i data-lucide="github"></i>
+                  </a>
+                                    <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn Profile" class="social-icon" id="social-in">
+                                        <i data-lucide="linkedin"></i>
+                                    </a>
+                                    <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram Profile" class="social-icon" id="social-ig">
+                                        <i data-lucide="instagram"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="contact-form-column reveal-right">
+                            <div class="form-wrapper">
+                                <h3 class="form-title">Send a Message</h3>
+
+                                <form id="contact-form" class="contact-form" novalidate>
+                                    <div class="input-group">
+                                        <input type="text" id="form-name" required class="form-input" placeholder=" " />
+                                        <label for="form-name" class="form-label">Name</label>
+                                        <span class="input-line"></span>
+                                        <div class="error-msg" id="name-error">
+                                            Please enter your name
+                                        </div>
+                                    </div>
+
+                                    <div class="input-group">
+                                        <input type="email" id="form-email" required class="form-input" placeholder=" " />
+                                        <label for="form-email" class="form-label">Email</label>
+                                        <span class="input-line"></span>
+                                        <div class="error-msg" id="email-error">
+                                            Please enter a valid email
+                                        </div>
+                                    </div>
+
+                                    <div class="input-group">
+                                        <input type="tel" id="form-phone" class="form-input" placeholder=" " />
+                                        <label for="form-phone" class="form-label">Phone Number (Optional)</label
+                    >
+                    <span class="input-line"></span>
+                  </div>
+
+                  <div class="input-group">
+                    <textarea
+                      id="form-message"
+                      required
+                      class="form-input form-textarea"
+                      placeholder=" "
+                      rows="4"
+                    ></textarea>
+                    <label for="form-message" class="form-label">Message</label>
+                                        <span class="input-line"></span>
+                                        <div class="error-msg" id="message-error">
+                                            Please enter your message
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary btn-submit" id="btn-submit-form">
+                    <span>Send Message</span>
+                    <i data-lucide="send" class="btn-icon"></i>
+                  </button>
+
+                                    <div class="form-notification" id="form-status">
+                                        <i data-lucide="check-circle" class="status-icon success-icon"></i>
+                                        <i data-lucide="alert-circle" class="status-icon error-icon"></i>
+                                        <span class="status-message"></span>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container footer-container">
+                <div class="footer-logo">
+                    <span class="logo-accent">&lt;</span>Sindhi<span>Prince</span
+          ><span class="logo-accent">/&gt;</span>
+                </div>
+
+                <p class="footer-quote">
+                    "Every expert was once a beginner. I believe in learning, building, and improving every single day."
+                </p>
+
+                <ul class="footer-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#resume">Resume</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+
+                <p class="copyright" id="footer-copy">
+                    &copy; 2026 Sindhi Prince. All Rights Reserved. Crafted with passion.
+                </p>
+            </div>
+
+            <!-- Back to Top Button -->
+            <a href="#home" class="back-to-top" id="back-to-top" aria-label="Back to top">
+                <i data-lucide="arrow-up"></i>
+            </a>
+        </footer>
+
+        <!-- Main JavaScript -->
+        <script src="script.js"></script>
+</body>
+
+</html>

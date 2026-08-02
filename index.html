@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Nova AI is an intelligent productivity platform designed to help individuals and businesses automate tasks, improve efficiency, and make smarter decisions with Artificial Intelligence.">
+  <title>Nova AI - The Future of Artificial Intelligence Starts Here</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <!-- Preloader -->
+  <div class="preloader" id="preloader">
+    <div class="preloader-content">
+      <div class="preloader-logo">
+        <span class="logo-icon">✨</span>
+        <span class="logo-text">Nova<span class="gradient-accent-text">AI</span></span>
+      </div>
+      <div class="preloader-bar-bg">
+        <div class="preloader-bar" id="preloader-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom Cursor -->
+  <div class="custom-cursor-dot" id="cursor-dot"></div>
+  <div class="custom-cursor-outline" id="cursor-outline"></div>
+
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress" id="scroll-progress"></div>
+
+  <!-- Ambient Background Blobs -->
+  <div class="bg-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <!-- Header / Navigation -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#home" class="nav-logo" id="nav-logo">
+        <span class="logo-spark">✨</span>
+        <span class="logo-title">Nova<span class="gradient-text">AI</span></span>
+      </a>
+      
+      <nav class="nav-links" id="nav-menu">
+        <a href="#home" class="nav-link active" data-sec="home">Home</a>
+        <a href="#features" class="nav-link" data-sec="features">Features</a>
+        <a href="#about" class="nav-link" data-sec="about">About</a>
+        <a href="#pricing" class="nav-link" data-sec="pricing">Pricing</a>
+        <a href="#testimonials" class="nav-link" data-sec="testimonials">Testimonials</a>
+        <a href="#contact" class="nav-link" data-sec="contact">Contact</a>
+        <a href="#pricing" class="nav-btn mobile-only-btn">Get Started</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="#pricing" class="nav-btn desktop-only-btn">Get Started</a>
+        <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Navigation Menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+      <div class="section-container hero-container">
+        
+        <div class="hero-content">
+          <div class="hero-badge reveal-item">
+            <span class="badge-spark">🔥</span>
+            <span>Next-Gen Platform is Live</span>
+          </div>
+          
+          <h1 class="hero-title reveal-item">
+            Work Smarter with <br>
+            <span class="gradient-text" id="typing-target"></span>
+          </h1>
+          
+          <p class="hero-subtitle reveal-item">
+            Automate your workflow, boost productivity, and unlock the power of Artificial Intelligence with Nova AI. 
+            Empower your team with self-optimizing pipelines.
+          </p>
+          
+          <div class="hero-cta reveal-item">
+            <a href="#pricing" class="btn btn-primary glowing-btn">Get Started <i data-lucide="arrow-right"></i></a>
+            <a href="#features" class="btn btn-secondary">Learn More</a>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal-item">
+          <!-- Interactive Dashboard Mockup -->
+          <div class="dashboard-mockup">
+            <div class="mockup-header">
+              <div class="mockup-dots">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="mockup-title">Nova AI Workspace</div>
+              <div class="mockup-status"><span class="pulse-indicator"></span> Live</div>
+            </div>
+            <div class="mockup-body">
+              <div class="mockup-sidebar">
+                <div class="sidebar-item active"><i data-lucide="layout-dashboard"></i></div>
+                <div class="sidebar-item"><i data-lucide="cpu"></i></div>
+                <div class="sidebar-item"><i data-lucide="git-pull-request"></i></div>
+                <div class="sidebar-item"><i data-lucide="settings"></i></div>
+              </div>
+              <div class="mockup-main">
+                <div class="dashboard-stats-grid">
+                  <div class="dashboard-stat-card card-glow">
+                    <span class="stat-label">Tasks Automated</span>
+                    <span class="stat-value">94.2k</span>
+                    <span class="stat-change positive">+24.5%</span>
+                  </div>
+                  <div class="dashboard-stat-card card-glow">
+                    <span class="stat-label">Model Accuracy</span>
+                    <span class="stat-value">99.85%</span>
+                    <span class="stat-change neutral">Max</span>
+                  </div>
+                </div>
+                <div class="dashboard-chart-card card-glow">
+                  <div class="chart-header">
+                    <span>Performance Speedup</span>
+                    <span class="chart-legend"><span class="legend-color"></span> Active</span>
+                  </div>
+                  <div class="chart-svg-container">
+                    <svg viewBox="0 0 300 120" class="chart-svg">
+                      <defs>
+                        <linearGradient id="chart-grad" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0%" stop-color="var(--accent-purple)" stop-opacity="0.4"/>
+                          <stop offset="100%" stop-color="var(--accent-purple)" stop-opacity="0"/>
+                        </linearGradient>
+                      </defs>
+                      <path d="M 0 100 Q 40 80 80 50 T 160 30 T 240 70 T 300 10" fill="none" stroke="var(--accent-cyan)" stroke-width="3"></path>
+                      <path d="M 0 100 Q 40 80 80 50 T 160 30 T 240 70 T 300 10 L 300 120 L 0 120 Z" fill="url(#chart-grad)"></path>
+                      <circle cx="80" cy="50" r="5" fill="var(--accent-purple)" class="chart-node"></circle>
+                      <circle cx="160" cy="30" r="5" fill="var(--accent-cyan)" class="chart-node"></circle>
+                      <circle cx="300" cy="10" r="5" fill="var(--accent-blue)" class="chart-node"></circle>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Floating Glowing Cards -->
+            <div class="floating-card float-card-1 card-glow">
+              <div class="float-card-icon purple"><i data-lucide="zap"></i></div>
+              <div class="float-card-info">
+                <span class="float-card-title">Automation Triggered</span>
+                <span class="float-card-desc">Saved 4.5 hrs today</span>
+              </div>
+            </div>
+
+            <div class="floating-card float-card-2 card-glow">
+              <div class="float-card-icon cyan"><i data-lucide="shield-check"></i></div>
+              <div class="float-card-info">
+                <span class="float-card-title">Threat Cleaned</span>
+                <span class="float-card-desc">0 vulnerability detected</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+      <div class="section-container">
+        
+        <div class="section-header reveal-item">
+          <h2 class="section-title">Designed for the <span class="gradient-text">Modern Workflow</span></h2>
+          <p class="section-subtitle">Supercharge your operations with state-of-the-art AI-driven modules engineered for precision.</p>
+        </div>
+
+        <div class="features-grid">
+          
+          <div class="feature-card reveal-item card-glow" id="feat-1">
+            <div class="feature-icon"><i data-lucide="cpu"></i></div>
+            <h3 class="feature-card-title">AI Automation</h3>
+            <p class="feature-card-desc">Automate repetitive processes with self-learning neural nets that adapt to your custom pipelines.</p>
+            <div class="card-border-glow"></div>
+          </div>
+
+          <div class="feature-card reveal-item card-glow" id="feat-2">
+            <div class="feature-icon"><i data-lucide="bar-chart-3"></i></div>
+            <h3 class="feature-card-title">Smart Analytics</h3>
+            <p class="feature-card-desc">Derive deep diagnostic signals and predictive models from your enterprise data in milliseconds.</p>
+            <div class="card-border-glow"></div>
+          </div>
+
+          <div class="feature-card reveal-item card-glow" id="feat-3">
+            <div class="feature-icon"><i data-lucide="cloud-lightning"></i></div>
+            <h3 class="feature-card-title">Cloud Storage</h3>
+            <p class="feature-card-desc">Securely index, store, and recall all operational datasets in our decentralized, low-latency cloud vault.</p>
+            <div class="card-border-glow"></div>
+          </div>
+
+          <div class="feature-card reveal-item card-glow" id="feat-4">
+            <div class="feature-icon"><i data-lucide="headphones"></i></div>
+            <h3 class="feature-card-title">24/7 Support</h3>
+            <p class="feature-card-desc">Instant diagnostic assistance and architectural support from our dedicated engineer team anytime.</p>
+            <div class="card-border-glow"></div>
+          </div>
+
+          <div class="feature-card reveal-item card-glow" id="feat-5">
+            <div class="feature-icon"><i data-lucide="shield"></i></div>
+            <h3 class="feature-card-title">Secure Platform</h3>
+            <p class="feature-card-desc">Protected by end-to-end homomorphic encryption, zero-knowledge proofs, and real-time guardrails.</p>
+            <div class="card-border-glow"></div>
+          </div>
+
+          <div class="feature-card reveal-item card-glow" id="feat-6">
+            <div class="feature-icon"><i data-lucide="gauge"></i></div>
+            <h3 class="feature-card-title">Fast Performance</h3>
+            <p class="feature-card-desc">Optimized backend running on hyper-threaded TPU clusters to deliver zero-latency responses.</p>
+            <div class="card-border-glow"></div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+      <div class="section-container about-container">
+        
+        <div class="about-content reveal-item">
+          <h2 class="section-title">Redefining How <span class="gradient-text">Teams Innovate</span></h2>
+          <p class="about-text">
+            Nova AI was founded to bridge the gap between complex artificial intelligence algorithms and day-to-day business operations. 
+            We build tools that make intelligent orchestration simple, robust, and accessible to everyone.
+          </p>
+          <p class="about-text">
+            By shifting from passive execution to active context-aware support, our workspace enables developers, operators, 
+            and creatives to focus on high-leverage strategic thinking while Nova AI manages the operational friction.
+          </p>
+          <div class="about-bullets">
+            <div class="bullet-item"><i data-lucide="check-circle-2" class="bullet-check"></i> <span>Automated task parsing and dispatching</span></div>
+            <div class="bullet-item"><i data-lucide="check-circle-2" class="bullet-check"></i> <span>Contextual cognitive workflows</span></div>
+            <div class="bullet-item"><i data-lucide="check-circle-2" class="bullet-check"></i> <span>Seamless cross-platform integrations</span></div>
+          </div>
+        </div>
+
+        <div class="about-stats-visual reveal-item">
+          <!-- Interactive nodes background element & stats grid -->
+          <div class="stats-interactive-box card-glow">
+            <div class="stats-interactive-inner">
+              <div class="network-node-map">
+                <!-- SVG network path animation -->
+                <svg class="network-svg" width="100%" height="100%">
+                  <path d="M 50 50 L 150 120 L 250 50 M 150 120 L 150 220" stroke="rgba(139, 92, 246, 0.2)" stroke-width="2" stroke-dasharray="5 5"></path>
+                  <circle cx="50" cy="50" r="6" fill="var(--accent-purple)"></circle>
+                  <circle cx="150" cy="120" r="8" fill="var(--accent-cyan)"></circle>
+                  <circle cx="250" cy="50" r="6" fill="var(--accent-blue)"></circle>
+                  <circle cx="150" cy="220" r="6" fill="var(--accent-purple)"></circle>
+                </svg>
+              </div>
+              <div class="counters-grid">
+                <div class="counter-card" id="counter-card-1">
+                  <span class="counter-number" data-target="10000" data-suffix="K+">0</span>
+                  <span class="counter-label">Happy Users</span>
+                </div>
+                <div class="counter-card" id="counter-card-2">
+                  <span class="counter-number" data-target="99.9" data-suffix="%" data-decimal="true">0</span>
+                  <span class="counter-label">Uptime</span>
+                </div>
+                <div class="counter-card" id="counter-card-3">
+                  <span class="counter-number" data-target="50" data-suffix="+">0</span>
+                  <span class="counter-label">Countries</span>
+                </div>
+                <div class="counter-card" id="counter-card-4">
+                  <span class="counter-number" data-target="1000000" data-suffix="M+" data-scale="1000000">0</span>
+                  <span class="counter-label">Tasks Automated</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section" id="services">
+      <div class="section-container">
+        
+        <div class="section-header reveal-item">
+          <h2 class="section-title">Core <span class="gradient-text">AI Services</span></h2>
+          <p class="section-subtitle">Custom-tailored algorithms optimized to power complex software and analytics platforms.</p>
+        </div>
+
+        <div class="services-grid">
+          
+          <div class="service-card reveal-item card-glow">
+            <div class="service-icon-wrapper"><i data-lucide="messages-square"></i></div>
+            <h3 class="service-title">AI Chatbot</h3>
+            <p class="service-desc">Human-like contextual agents equipped with multi-turn reasoning to handle customer support, ticket resolution, and lead qualification.</p>
+            <span class="service-link">Learn More <i data-lucide="chevron-right"></i></span>
+          </div>
+
+          <div class="service-card reveal-item card-glow">
+            <div class="service-icon-wrapper"><i data-lucide="git-merge"></i></div>
+            <h3 class="service-title">Workflow Automation</h3>
+            <p class="service-desc">Chain multiple actions, apps, and triggers together using our robust visual canvas. Trigger workflows based on custom schedules.</p>
+            <span class="service-link">Learn More <i data-lucide="chevron-right"></i></span>
+          </div>
+
+          <div class="service-card reveal-item card-glow">
+            <div class="service-icon-wrapper"><i data-lucide="binary"></i></div>
+            <h3 class="service-title">Data Analysis</h3>
+            <p class="service-desc">Ingest raw JSON, CSV, or database endpoints and automatically generate dashboards, correlation matrixes, and actionable signals.</p>
+            <span class="service-link">Learn More <i data-lucide="chevron-right"></i></span>
+          </div>
+
+          <div class="service-card reveal-item card-glow">
+            <div class="service-icon-wrapper"><i data-lucide="presentation"></i></div>
+            <h3 class="service-title">Business Intelligence</h3>
+            <p class="service-desc">Monitor market fluctuations and industry benchmarks. Make informed planning decisions using our intelligence forecast engine.</p>
+            <span class="service-link">Learn More <i data-lucide="chevron-right"></i></span>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="why-section" id="why-choose-us">
+      <div class="section-container">
+        
+        <div class="section-header reveal-item">
+          <h2 class="section-title">Why Teams Choose <span class="gradient-text">Nova AI</span></h2>
+          <p class="section-subtitle">Compare our next-generation architecture with traditional operations stacks.</p>
+        </div>
+
+        <div class="why-grid">
+          
+          <div class="why-card reveal-item card-glow">
+            <div class="why-badge cyan-badge">Speed</div>
+            <h3 class="why-card-title">Hyper-fast Executions</h3>
+            <p class="why-card-desc">With distributed tensor compilation, our automated tasks execute up to 10x faster than traditional node loops.</p>
+          </div>
+
+          <div class="why-card reveal-item card-glow">
+            <div class="why-badge">Security</div>
+            <h3 class="why-card-title">Enterprise Security</h3>
+            <p class="why-card-desc">GDPR, HIPAA, and SOC2 compliant configurations. Your data is isolated in separate virtual clusters.</p>
+          </div>
+
+          <div class="why-card reveal-item card-glow">
+            <div class="why-badge blue-badge">Modern</div>
+            <h3 class="why-card-title">Stripe-level UX</h3>
+            <p class="why-card-desc">A beautiful design with premium control dashboards, interactive debugging logs, and seamless UI interfaces.</p>
+          </div>
+
+          <div class="why-card reveal-item card-glow">
+            <div class="why-badge purple-badge">Reliable</div>
+            <h3 class="why-card-title">Self-healing Workflows</h3>
+            <p class="why-card-desc">If an external API endpoint fails, Nova AI automatically handles errors, retries steps, and re-routes pipelines.</p>
+          </div>
+
+          <div class="why-card reveal-item card-glow">
+            <div class="why-badge cyan-badge">Affordable</div>
+            <h3 class="why-card-title">Scalable Rates</h3>
+            <p class="why-card-desc">Flexible pay-as-you-go and tiered plans designed to fit everyone from bootstrap solo founders to enterprise giants.</p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section" id="pricing">
+      <div class="section-container">
+        
+        <div class="section-header reveal-item">
+          <h2 class="section-title">Simple, Transparent <span class="gradient-text">Pricing</span></h2>
+          <p class="section-subtitle">Start building immediately. Scale pricing according to your actual operational throughput.</p>
+          
+          <!-- Pricing Toggle -->
+          <div class="pricing-toggle-container">
+            <span class="toggle-label active" id="toggle-monthly">Monthly</span>
+            <button class="pricing-toggle-btn" id="pricing-toggle" aria-label="Toggle Billing Cycle">
+              <span class="pricing-toggle-circle"></span>
+            </button>
+            <span class="toggle-label" id="toggle-annual">Annually <span class="discount-badge">Save 20%</span></span>
+          </div>
+        </div>
+
+        <div class="pricing-grid">
+          
+          <!-- Starter Plan -->
+          <div class="pricing-card reveal-item card-glow" id="plan-starter">
+            <h3 class="plan-name">Starter</h3>
+            <p class="plan-desc">For developers and small team experiments.</p>
+            <div class="plan-price">
+              <span class="price-symbol">$</span>
+              <span class="price-val" data-monthly="19" data-annual="15">19</span>
+              <span class="price-period">/mo</span>
+            </div>
+            <a href="#contact" class="btn btn-secondary pricing-btn">Get Started</a>
+            <ul class="plan-features">
+              <li><i data-lucide="check" class="check-icon"></i> <span>5,000 tasks/month</span></li>
+              <li><i data-lucide="check" class="check-icon"></i> <span>Basic chatbot access</span></li>
+              <li><i data-lucide="check" class="check-icon"></i> <span>10 GB secure cloud storage</span></li>
+              <li><i data-lucide="check" class="check-icon"></i> <span>Standard dashboard analytics</span></li>
+              <li class="disabled"><i data-lucide="x" class="cross-icon"></i> <span>TPU hardware compilation</span></li>
+              <li class="disabled"><i data-lucide="x" class="cross-icon"></i> <span>Dedicated account manager</span></li>
+            </ul>
+          </div>
+
+          <!-- Professional Plan (Highlighted) -->
+          <div class="pricing-card professional reveal-item card-glow featured-plan" id="plan-professional">
+            <div class="popular-badge">Most Popular</div>
+            <h3 class="plan-name">Professional</h3>
+            <p class="plan-desc">For growing startups and core business operations.</p>
+            <div class="plan-price">
+              <span class="price-symbol">$</span>
+              <span class="price-val" data-monthly="49" data-annual="39">49</span>
+              <span class="price-period">/mo</span>
+            </div>
+            <a href="#contact" class="btn btn-primary glowing-btn pricing-btn">Get Started Free</a>
+            <ul class="plan-features">
+              <li><i data-lucide="check" class="check-icon"></i> <span>50,000 tasks/month</span></li>
+              <li><i data-lucide="check" class="check-icon"></i> <span>Advanced reasoning chatbot</span></li>
+              <li><i data-lucide="check" class="check-icon"></i> <span>100 GB secure cloud storage</span></li>
+              <li><i data-lucide="check" class="check-icon"></i> <span>Deep analytics + reports</span></li>
+              <li><i data-lucide="check" class="check-icon"></i> <span>TPU hardware compilation</span></li>
+              <li class="disabled"><i data-lucide="x" class="cross-icon"></i> <span>Dedicated account manager</span></li>
+            </ul>
+          </div>
+
+          <!-- Enterprise Plan -->
+          <div class="pricing-card reveal-item card-glow" id="plan-enterprise">
+            <h3 class="plan-name">Enterprise</h3>
+            <p class="plan-desc">For large scale operations demanding dedicated power.</p>
+            <div class="plan-price">
+              <span class="price-symbol">$</span>
+              <span class="price-val" data-monthly="199" data-annual="159">199</span>
+              <span class="price-period">/mo</span>
+            </div>
+            <a href="#contact" class="btn btn-secondary pricing-btn">Contact Sales</a>
+            <ul class="plan-features">
+              <li><i data-lucide="check" class="check-icon"></i> <span>Unlimited tasks/month</span></li>
+              <li><i data-lucide="check" class="check-icon"></i> <span>Custom trained LLM nodes</span></li>
+              <li><i data-lucide="check" class="check-icon"></i> <span>1 TB secure cloud storage</span></li>
+              <li><i data-lucide="check" class="check-icon"></i> <span>Custom real-time APIs</span></li>
+              <li><i data-lucide="check" class="check-icon"></i> <span>Priority TPU priority compilation</span></li>
+              <li><i data-lucide="check" class="check-icon"></i> <span>Dedicated account manager</span></li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section" id="testimonials">
+      <div class="section-container">
+        
+        <div class="section-header reveal-item">
+          <h2 class="section-title">Loved by <span class="gradient-text">Builders</span></h2>
+          <p class="section-subtitle">Read how digital leaders use Nova AI to optimize their software releases.</p>
+        </div>
+
+        <div class="testimonials-grid">
+          
+          <!-- Testimonial 1 -->
+          <div class="testimonial-card reveal-item card-glow">
+            <div class="testimonial-rating">
+              <i data-lucide="star" class="star-fill"></i>
+              <i data-lucide="star" class="star-fill"></i>
+              <i data-lucide="star" class="star-fill"></i>
+              <i data-lucide="star" class="star-fill"></i>
+              <i data-lucide="star" class="star-fill"></i>
+            </div>
+            <p class="testimonial-text">
+              "Integrating Nova AI into our code validation pipeline has reduced manual errors by 90%. The AI chatbot behaves like an experienced tech lead."
+            </p>
+            <div class="testimonial-user">
+              <div class="user-avatar gradient-avatar-1">AH</div>
+              <div class="user-info">
+                <span class="user-name">Alex Hales</span>
+                <span class="user-title">VP of Product, CloudTech</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial 2 -->
+          <div class="testimonial-card reveal-item card-glow">
+            <div class="testimonial-rating">
+              <i data-lucide="star" class="star-fill"></i>
+              <i data-lucide="star" class="star-fill"></i>
+              <i data-lucide="star" class="star-fill"></i>
+              <i data-lucide="star" class="star-fill"></i>
+              <i data-lucide="star" class="star-fill"></i>
+            </div>
+            <p class="testimonial-text">
+              "The workflow automation module is incredible. The dashboard feels just as smooth as Stripe. We scaled from 1K tasks to 100K effortlessly."
+            </p>
+            <div class="testimonial-user">
+              <div class="user-avatar gradient-avatar-2">SK</div>
+              <div class="user-info">
+                <span class="user-name">Sarah Jenkins</span>
+                <span class="user-title">Co-Founder, SaaSify</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial 3 -->
+          <div class="testimonial-card reveal-item card-glow">
+            <div class="testimonial-rating">
+              <i data-lucide="star" class="star-fill"></i>
+              <i data-lucide="star" class="star-fill"></i>
+              <i data-lucide="star" class="star-fill"></i>
+              <i data-lucide="star" class="star-fill"></i>
+              <i data-lucide="star" class="star-fill"></i>
+            </div>
+            <p class="testimonial-text">
+              "Security was our primary blocker for migrating to AI tools. Nova's virtual cluster isolation let us pass security audits within days."
+            </p>
+            <div class="testimonial-user">
+              <div class="user-avatar gradient-avatar-3">MR</div>
+              <div class="user-info">
+                <span class="user-name">Marcus Russo</span>
+                <span class="user-title">CTO, SecureLogistics</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section" id="faq">
+      <div class="section-container faq-container">
+        
+        <div class="section-header reveal-item">
+          <h2 class="section-title">Frequently Asked <span class="gradient-text">Questions</span></h2>
+          <p class="section-subtitle">Got questions? We've got answers. Explore how Nova AI can fit your operational workflow.</p>
+        </div>
+
+        <div class="faq-accordion reveal-item">
+          
+          <div class="faq-item" id="faq-1">
+            <button class="faq-trigger" aria-expanded="false" aria-controls="faq-content-1">
+              <span>How does Nova AI integrate with my existing tools?</span>
+              <span class="faq-icon-box"><i data-lucide="plus" class="faq-icon"></i></span>
+            </button>
+            <div class="faq-content" id="faq-content-1" role="region" aria-labelledby="faq-1">
+              <div class="faq-content-inner">
+                <p>Nova AI supports native integrations with Slack, Discord, GitHub, Stripe, Salesforce, and over 1,500 other SaaS platforms through our webhooks. You can set up workflows through our visual canvas or programmatically via our API.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" id="faq-2">
+            <button class="faq-trigger" aria-expanded="false" aria-controls="faq-content-2">
+              <span>Is my data secure with Nova AI?</span>
+              <span class="faq-icon-box"><i data-lucide="plus" class="faq-icon"></i></span>
+            </button>
+            <div class="faq-content" id="faq-content-2" role="region" aria-labelledby="faq-2">
+              <div class="faq-content-inner">
+                <p>Security is our absolute priority. We utilize end-to-end homomorphic encryption. All datasets are isolated inside dedicated virtual clusters. We do not use your proprietary business data to train our foundational models.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" id="faq-3">
+            <button class="faq-trigger" aria-expanded="false" aria-controls="faq-content-3">
+              <span>Can I upgrade or downgrade my plan at any time?</span>
+              <span class="faq-icon-box"><i data-lucide="plus" class="faq-icon"></i></span>
+            </button>
+            <div class="faq-content" id="faq-content-3" role="region" aria-labelledby="faq-3">
+              <div class="faq-content-inner">
+                <p>Yes. You can upgrade, downgrade, or cancel your monthly or annual subscription at any time directly through your account dashboard. Downgrades will apply at the end of the current billing cycle.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" id="faq-4">
+            <button class="faq-trigger" aria-expanded="false" aria-controls="faq-content-4">
+              <span>Do you offer a free trial?</span>
+              <span class="faq-icon-box"><i data-lucide="plus" class="faq-icon"></i></span>
+            </button>
+            <div class="faq-content" id="faq-content-4" role="region" aria-labelledby="faq-4">
+              <div class="faq-content-inner">
+                <p>Absolutely. We offer a 14-day free trial on the Professional plan. No credit card is required to sign up. You will get full access to the task automation pipeline during this period.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" id="faq-5">
+            <button class="faq-trigger" aria-expanded="false" aria-controls="faq-content-5">
+              <span>How does the AI model stay updated?</span>
+              <span class="faq-icon-box"><i data-lucide="plus" class="faq-icon"></i></span>
+            </button>
+            <div class="faq-content" id="faq-content-5" role="region" aria-labelledby="faq-5">
+              <div class="faq-content-inner">
+                <p>Our foundation models are retrained weekly on verified open-source pipelines. In addition, we deploy live reinforcement learning checks that safely fine-tune localized task workflows to your specific preferences.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Call To Action Section -->
+    <section class="cta-section">
+      <div class="section-container">
+        <div class="cta-banner card-glow reveal-item">
+          <div class="cta-banner-content">
+            <h2 class="cta-title">Ready to Transform Your Workflow?</h2>
+            <p class="cta-desc">Join thousands of high-velocity teams utilizing Nova AI to automate their operations.</p>
+            <a href="#pricing" class="btn btn-primary glowing-btn">Start Free Today <i data-lucide="rocket"></i></a>
+          </div>
+          <!-- CTA Background Glow Details -->
+          <div class="cta-glow-element"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+      <div class="section-container contact-container">
+        
+        <div class="contact-info-panel reveal-item">
+          <h2 class="section-title">Get in <span class="gradient-text">Touch</span></h2>
+          <p class="contact-panel-desc">Have questions about integrations, security audits, or enterprise customized plans? Drop us a line.</p>
+          
+          <div class="contact-details">
+            <div class="contact-detail-item">
+              <div class="detail-icon"><i data-lucide="mail"></i></div>
+              <div class="detail-text">
+                <span class="detail-label">Email Us</span>
+                <a href="mailto:hello@nova-ai.io" class="detail-val">hello@nova-ai.io</a>
+              </div>
+            </div>
+            <div class="contact-detail-item">
+              <div class="detail-icon"><i data-lucide="map-pin"></i></div>
+              <div class="detail-text">
+                <span class="detail-label">HQ Office</span>
+                <span class="detail-val">One Infinite Loop, Cupertino, CA</span>
+              </div>
+            </div>
+            <div class="contact-detail-item">
+              <div class="detail-icon"><i data-lucide="phone"></i></div>
+              <div class="detail-text">
+                <span class="detail-label">Call Support</span>
+                <span class="detail-val">+1 (555) 019-9432</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Stylized Google Maps Placeholder -->
+          <div class="maps-mockup card-glow">
+            <div class="map-overlay">
+              <div class="map-marker-glow"></div>
+              <div class="map-tooltip">Nova AI HQ</div>
+            </div>
+            <!-- Styled grid patterns for map graphic representation -->
+            <div class="map-grid-pattern"></div>
+          </div>
+        </div>
+
+        <div class="contact-form-panel reveal-item card-glow" id="contact-form-card">
+          <form class="contact-form" id="contact-form" novalidate>
+            <div class="form-group">
+              <input type="text" id="contact-name" class="form-input" placeholder=" " required>
+              <label for="contact-name" class="form-label">Full Name</label>
+              <span class="input-focus-line"></span>
+            </div>
+            
+            <div class="form-group">
+              <input type="email" id="contact-email" class="form-input" placeholder=" " required>
+              <label for="contact-email" class="form-label">Email Address</label>
+              <span class="input-focus-line"></span>
+            </div>
+            
+            <div class="form-group">
+              <textarea id="contact-message" class="form-input text-area-input" placeholder=" " rows="5" required></textarea>
+              <label for="contact-message" class="form-label">Your Message</label>
+              <span class="input-focus-line"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary glowing-btn form-submit-btn" id="contact-submit-btn">
+              <span>Send Message</span>
+              <i data-lucide="send"></i>
+            </button>
+            <div class="form-status-msg" id="form-status"></div>
+          </form>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="section-container footer-container">
+      
+      <div class="footer-brand">
+        <a href="#home" class="footer-logo">
+          <span class="logo-spark">✨</span>
+          <span class="logo-title">Nova<span class="gradient-text">AI</span></span>
+        </a>
+        <p class="footer-brand-desc">The future of artificial intelligence starts here. Build cognitive networks to scale your team.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-icon" aria-label="X (Twitter)"><i data-lucide="twitter"></i></a>
+          <a href="#" class="social-icon" aria-label="GitHub"><i data-lucide="github"></i></a>
+          <a href="#" class="social-icon" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+          <a href="#" class="social-icon" aria-label="YouTube"><i data-lucide="youtube"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-links-grid">
+        <div class="footer-links-col">
+          <h4 class="footer-title">Quick Links</h4>
+          <ul class="footer-list">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links-col">
+          <h4 class="footer-title">Services</h4>
+          <ul class="footer-list">
+            <li><a href="#services">AI Chatbot</a></li>
+            <li><a href="#services">Workflow Automation</a></li>
+            <li><a href="#services">Data Analysis</a></li>
+            <li><a href="#services">Business Intelligence</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col newsletter-col">
+          <h4 class="footer-title">Newsletter</h4>
+          <p class="newsletter-desc">Subscribe to stay updated with product updates and AI workflow optimizations.</p>
+          <form class="newsletter-form" id="newsletter-form">
+            <input type="email" class="newsletter-input" id="newsletter-email" placeholder="Enter your email" required aria-label="Newsletter Email Input">
+            <button type="submit" class="newsletter-btn" aria-label="Subscribe to newsletter"><i data-lucide="arrow-right"></i></button>
+          </form>
+          <div class="newsletter-status" id="newsletter-status"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <div class="section-container footer-bottom-container">
+        <span class="copyright-text">&copy; 2026 Nova AI Inc. All rights reserved.</span>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Security Audits</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+</body>
+</html>

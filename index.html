@@ -1,838 +1,795 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sindhi Prince | Aspiring Frontend Web Developer Portfolio</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Nova AI is an intelligent productivity platform designed to help individuals and businesses automate tasks, improve efficiency, and make smarter decisions with Artificial Intelligence.">
+  <title>Nova AI - The Future of Artificial Intelligence Starts Here</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
 
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Professional portfolio of Sindhi Prince - Aspiring Frontend Web Developer, BCA student at Sankalchand Patel University." />
-    <meta name="keywords" content="Sindhi Prince, Frontend Developer, BCA Student, Portfolio, Web Developer, JavaScript, CSS, HTML5, Responsive Design, Sankalchand Patel University" />
-    <meta name="author" content="Sindhi Prince" />
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Sindhi Prince | Aspiring Frontend Web Developer Portfolio" />
-    <meta property="og:description" content="Professional portfolio of Sindhi Prince - Aspiring Frontend Web Developer and BCA Student." />
-    <meta property="og:image" content="assets/avatar.png" />
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:title" content="Sindhi Prince | Aspiring Frontend Web Developer Portfolio" />
-    <meta property="twitter:description" content="Professional portfolio of Sindhi Prince - Aspiring Frontend Web Developer and BCA Student." />
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="style.css" />
-
-    <!-- Lucide Icons CDN -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-
 <body>
-    <!-- Preloader -->
-    <div id="preloader" class="preloader">
-        <div class="preloader-blur"></div>
-        <div class="preloader-content">
-            <div class="preloader-logo">
-                <span class="logo-accent">&lt;</span>SP<span class="logo-accent">/&gt;</span
-          >
-        </div>
-        <div class="preloader-progress-container">
-          <div class="preloader-progress-bar" id="preloader-bar"></div>
-        </div>
-        <div class="preloader-percentage" id="preloader-percentage">0%</div>
+
+  <!-- Preloader -->
+  <div class="preloader" id="preloader">
+    <div class="preloader-content">
+      <div class="preloader-logo">
+        <span class="logo-icon">✨</span>
+        <span class="logo-text">Nova<span class="gradient-accent-text">AI</span></span>
+      </div>
+      <div class="preloader-bar-bg">
+        <div class="preloader-bar" id="preloader-bar"></div>
       </div>
     </div>
+  </div>
 
-    <!-- Custom Cursor -->
-    <div class="cursor-dot" id="cursor-dot"></div>
-    <div class="cursor-outline" id="cursor-outline"></div>
+  <!-- Custom Cursor -->
+  <div class="custom-cursor-dot" id="cursor-dot"></div>
+  <div class="custom-cursor-outline" id="cursor-outline"></div>
 
-    <!-- Scroll Progress Bar -->
-    <div class="scroll-progress-bar" id="scroll-progress"></div>
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress" id="scroll-progress"></div>
 
-    <!-- Background Decoration Grid & Glowing Orbs -->
-    <div class="grid-overlay"></div>
-    <div class="glow-orb orb-1"></div>
-    <div class="glow-orb orb-2"></div>
-    <div class="glow-orb orb-3"></div>
+  <!-- Ambient Background Blobs -->
+  <div class="bg-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
 
-    <!-- Header / Navbar -->
-    <header class="header" id="header">
-      <div class="nav-container">
-        <a href="#home" class="logo" id="logo-nav">
-          <span class="logo-accent">&lt;</span>Sindhi<span>Prince</span
-          ><span class="logo-accent">/&gt;</span>
-                </a>
+  <!-- Header / Navigation -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#home" class="nav-logo" id="nav-logo">
+        <span class="logo-spark">✨</span>
+        <span class="logo-title">Nova<span class="gradient-text">AI</span></span>
+      </a>
+      
+      <nav class="nav-links" id="nav-menu">
+        <a href="#home" class="nav-link active" data-sec="home">Home</a>
+        <a href="#features" class="nav-link" data-sec="features">Features</a>
+        <a href="#about" class="nav-link" data-sec="about">About</a>
+        <a href="#pricing" class="nav-link" data-sec="pricing">Pricing</a>
+        <a href="#testimonials" class="nav-link" data-sec="testimonials">Testimonials</a>
+        <a href="#contact" class="nav-link" data-sec="contact">Contact</a>
+        <a href="#pricing" class="nav-btn mobile-only-btn">Get Started</a>
+      </nav>
 
-                <nav class="nav-menu" id="nav-menu">
-                    <ul class="nav-list">
-                        <li>
-                            <a href="#home" class="nav-link active" id="nav-home">Home</a>
-                        </li>
-                        <li><a href="#about" class="nav-link" id="nav-about">About</a></li>
-                        <li>
-                            <a href="#skills" class="nav-link" id="nav-skills">Skills</a>
-                        </li>
-                        <li>
-                            <a href="#projects" class="nav-link" id="nav-projects">Projects</a
-              >
-            </li>
-            <li>
-              <a href="#resume" class="nav-link" id="nav-resume">Resume</a>
-                        </li>
-                        <li>
-                            <a href="#contact" class="nav-link" id="nav-contact">Contact</a>
-                        </li>
-                    </ul>
-                </nav>
+      <div class="nav-actions">
+        <a href="#pricing" class="nav-btn desktop-only-btn">Get Started</a>
+        <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Navigation Menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
 
-                <div class="nav-actions">
-                    <a href="#contact" class="btn btn-primary btn-nav" id="btn-hire">Hire Me</a
-          >
-          <button
-            class="nav-toggle"
-            id="nav-toggle"
-            aria-label="Toggle navigation menu"
-          >
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-          </button>
+  <!-- Main Content -->
+  <main>
+    
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+      <div class="section-container hero-container">
+        
+        <div class="hero-content">
+          <div class="hero-badge reveal-item">
+            <span class="badge-spark">🔥</span>
+            <span>Next-Gen Platform is Live</span>
+          </div>
+          
+          <h1 class="hero-title reveal-item">
+            Work Smarter with <br>
+            <span class="gradient-text" id="typing-target"></span>
+          </h1>
+          
+          <p class="hero-subtitle reveal-item">
+            Automate your workflow, boost productivity, and unlock the power of Artificial Intelligence with Nova AI. 
+            Empower your team with self-optimizing pipelines.
+          </p>
+          
+          <div class="hero-cta reveal-item">
+            <a href="#pricing" class="btn btn-primary glowing-btn">Get Started <i data-lucide="arrow-right"></i></a>
+            <a href="#features" class="btn btn-secondary">Learn More</a>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal-item">
+          <!-- Interactive Dashboard Mockup -->
+          <div class="dashboard-mockup">
+            <div class="mockup-header">
+              <div class="mockup-dots">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="mockup-title">Nova AI Workspace</div>
+              <div class="mockup-status"><span class="pulse-indicator"></span> Live</div>
+            </div>
+            <div class="mockup-body">
+              <div class="mockup-sidebar">
+                <div class="sidebar-item active"><i data-lucide="layout-dashboard"></i></div>
+                <div class="sidebar-item"><i data-lucide="cpu"></i></div>
+                <div class="sidebar-item"><i data-lucide="git-pull-request"></i></div>
+                <div class="sidebar-item"><i data-lucide="settings"></i></div>
+              </div>
+              <div class="mockup-main">
+                <div class="dashboard-stats-grid">
+                  <div class="dashboard-stat-card card-glow">
+                    <span class="stat-label">Tasks Automated</span>
+                    <span class="stat-value">94.2k</span>
+                    <span class="stat-change positive">+24.5%</span>
+                  </div>
+                  <div class="dashboard-stat-card card-glow">
+                    <span class="stat-label">Model Accuracy</span>
+                    <span class="stat-value">99.85%</span>
+                    <span class="stat-change neutral">Max</span>
+                  </div>
+                </div>
+                <div class="dashboard-chart-card card-glow">
+                  <div class="chart-header">
+                    <span>Performance Speedup</span>
+                    <span class="chart-legend"><span class="legend-color"></span> Active</span>
+                  </div>
+                  <div class="chart-svg-container">
+                    <svg viewBox="0 0 300 120" class="chart-svg">
+                      <defs>
+                        <linearGradient id="chart-grad" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0%" stop-color="var(--accent-purple)" stop-opacity="0.4"/>
+                          <stop offset="100%" stop-color="var(--accent-purple)" stop-opacity="0"/>
+                        </linearGradient>
+                      </defs>
+                      <path d="M 0 100 Q 40 80 80 50 T 160 30 T 240 70 T 300 10" fill="none" stroke="var(--accent-cyan)" stroke-width="3"></path>
+                      <path d="M 0 100 Q 40 80 80 50 T 160 30 T 240 70 T 300 10 L 300 120 L 0 120 Z" fill="url(#chart-grad)"></path>
+                      <circle cx="80" cy="50" r="5" fill="var(--accent-purple)" class="chart-node"></circle>
+                      <circle cx="160" cy="30" r="5" fill="var(--accent-cyan)" class="chart-node"></circle>
+                      <circle cx="300" cy="10" r="5" fill="var(--accent-blue)" class="chart-node"></circle>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Floating Glowing Cards -->
+            <div class="floating-card float-card-1 card-glow">
+              <div class="float-card-icon purple"><i data-lucide="zap"></i></div>
+              <div class="float-card-info">
+                <span class="float-card-title">Automation Triggered</span>
+                <span class="float-card-desc">Saved 4.5 hrs today</span>
+              </div>
+            </div>
+
+            <div class="floating-card float-card-2 card-glow">
+              <div class="float-card-icon cyan"><i data-lucide="shield-check"></i></div>
+              <div class="float-card-info">
+                <span class="float-card-title">Threat Cleaned</span>
+                <span class="float-card-desc">0 vulnerability detected</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+      <div class="section-container">
+        
+        <div class="section-header reveal-item">
+          <h2 class="section-title">Designed for the <span class="gradient-text">Modern Workflow</span></h2>
+          <p class="section-subtitle">Supercharge your operations with state-of-the-art AI-driven modules engineered for precision.</p>
+        </div>
+
+        <div class="features-grid">
+          
+          <div class="feature-card reveal-item card-glow" id="feat-1">
+            <div class="feature-icon"><i data-lucide="cpu"></i></div>
+            <h3 class="feature-card-title">AI Automation</h3>
+            <p class="feature-card-desc">Automate repetitive processes with self-learning neural nets that adapt to your custom pipelines.</p>
+            <div class="card-border-glow"></div>
+          </div>
+
+          <div class="feature-card reveal-item card-glow" id="feat-2">
+            <div class="feature-icon"><i data-lucide="bar-chart-3"></i></div>
+            <h3 class="feature-card-title">Smart Analytics</h3>
+            <p class="feature-card-desc">Derive deep diagnostic signals and predictive models from your enterprise data in milliseconds.</p>
+            <div class="card-border-glow"></div>
+          </div>
+
+          <div class="feature-card reveal-item card-glow" id="feat-3">
+            <div class="feature-icon"><i data-lucide="cloud-lightning"></i></div>
+            <h3 class="feature-card-title">Cloud Storage</h3>
+            <p class="feature-card-desc">Securely index, store, and recall all operational datasets in our decentralized, low-latency cloud vault.</p>
+            <div class="card-border-glow"></div>
+          </div>
+
+          <div class="feature-card reveal-item card-glow" id="feat-4">
+            <div class="feature-icon"><i data-lucide="headphones"></i></div>
+            <h3 class="feature-card-title">24/7 Support</h3>
+            <p class="feature-card-desc">Instant diagnostic assistance and architectural support from our dedicated engineer team anytime.</p>
+            <div class="card-border-glow"></div>
+          </div>
+
+          <div class="feature-card reveal-item card-glow" id="feat-5">
+            <div class="feature-icon"><i data-lucide="shield"></i></div>
+            <h3 class="feature-card-title">Secure Platform</h3>
+            <p class="feature-card-desc">Protected by end-to-end homomorphic encryption, zero-knowledge proofs, and real-time guardrails.</p>
+            <div class="card-border-glow"></div>
+          </div>
+
+          <div class="feature-card reveal-item card-glow" id="feat-6">
+            <div class="feature-icon"><i data-lucide="gauge"></i></div>
+            <h3 class="feature-card-title">Fast Performance</h3>
+            <p class="feature-card-desc">Optimized backend running on hyper-threaded TPU clusters to deliver zero-latency responses.</p>
+            <div class="card-border-glow"></div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+      <div class="section-container about-container">
+        
+        <div class="about-content reveal-item">
+          <h2 class="section-title">Redefining How <span class="gradient-text">Teams Innovate</span></h2>
+          <p class="about-text">
+            Nova AI was founded to bridge the gap between complex artificial intelligence algorithms and day-to-day business operations. 
+            We build tools that make intelligent orchestration simple, robust, and accessible to everyone.
+          </p>
+          <p class="about-text">
+            By shifting from passive execution to active context-aware support, our workspace enables developers, operators, 
+            and creatives to focus on high-leverage strategic thinking while Nova AI manages the operational friction.
+          </p>
+          <div class="about-bullets">
+            <div class="bullet-item"><i data-lucide="check-circle-2" class="bullet-check"></i> <span>Automated task parsing and dispatching</span></div>
+            <div class="bullet-item"><i data-lucide="check-circle-2" class="bullet-check"></i> <span>Contextual cognitive workflows</span></div>
+            <div class="bullet-item"><i data-lucide="check-circle-2" class="bullet-check"></i> <span>Seamless cross-platform integrations</span></div>
+          </div>
+        </div>
+
+        <div class="about-stats-visual reveal-item">
+          <!-- Interactive nodes background element & stats grid -->
+          <div class="stats-interactive-box card-glow">
+            <div class="stats-interactive-inner">
+              <div class="network-node-map">
+                <!-- SVG network path animation -->
+                <svg class="network-svg" width="100%" height="100%">
+                  <path d="M 50 50 L 150 120 L 250 50 M 150 120 L 150 220" stroke="rgba(139, 92, 246, 0.2)" stroke-width="2" stroke-dasharray="5 5"></path>
+                  <circle cx="50" cy="50" r="6" fill="var(--accent-purple)"></circle>
+                  <circle cx="150" cy="120" r="8" fill="var(--accent-cyan)"></circle>
+                  <circle cx="250" cy="50" r="6" fill="var(--accent-blue)"></circle>
+                  <circle cx="150" cy="220" r="6" fill="var(--accent-purple)"></circle>
+                </svg>
+              </div>
+              <div class="counters-grid">
+                <div class="counter-card" id="counter-card-1">
+                  <span class="counter-number" data-target="10000" data-suffix="K+">0</span>
+                  <span class="counter-label">Happy Users</span>
+                </div>
+                <div class="counter-card" id="counter-card-2">
+                  <span class="counter-number" data-target="99.9" data-suffix="%" data-decimal="true">0</span>
+                  <span class="counter-label">Uptime</span>
+                </div>
+                <div class="counter-card" id="counter-card-3">
+                  <span class="counter-number" data-target="50" data-suffix="+">0</span>
+                  <span class="counter-label">Countries</span>
+                </div>
+                <div class="counter-card" id="counter-card-4">
+                  <span class="counter-number" data-target="1000000" data-suffix="M+" data-scale="1000000">0</span>
+                  <span class="counter-label">Tasks Automated</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section" id="services">
+      <div class="section-container">
+        
+        <div class="section-header reveal-item">
+          <h2 class="section-title">Core <span class="gradient-text">AI Services</span></h2>
+          <p class="section-subtitle">Custom-tailored algorithms optimized to power complex software and analytics platforms.</p>
+        </div>
+
+        <div class="services-grid">
+          
+          <div class="service-card reveal-item card-glow">
+            <div class="service-icon-wrapper"><i data-lucide="messages-square"></i></div>
+            <h3 class="service-title">AI Chatbot</h3>
+            <p class="service-desc">Human-like contextual agents equipped with multi-turn reasoning to handle customer support, ticket resolution, and lead qualification.</p>
+            <span class="service-link">Learn More <i data-lucide="chevron-right"></i></span>
+          </div>
+
+          <div class="service-card reveal-item card-glow">
+            <div class="service-icon-wrapper"><i data-lucide="git-merge"></i></div>
+            <h3 class="service-title">Workflow Automation</h3>
+            <p class="service-desc">Chain multiple actions, apps, and triggers together using our robust visual canvas. Trigger workflows based on custom schedules.</p>
+            <span class="service-link">Learn More <i data-lucide="chevron-right"></i></span>
+          </div>
+
+          <div class="service-card reveal-item card-glow">
+            <div class="service-icon-wrapper"><i data-lucide="binary"></i></div>
+            <h3 class="service-title">Data Analysis</h3>
+            <p class="service-desc">Ingest raw JSON, CSV, or database endpoints and automatically generate dashboards, correlation matrixes, and actionable signals.</p>
+            <span class="service-link">Learn More <i data-lucide="chevron-right"></i></span>
+          </div>
+
+          <div class="service-card reveal-item card-glow">
+            <div class="service-icon-wrapper"><i data-lucide="presentation"></i></div>
+            <h3 class="service-title">Business Intelligence</h3>
+            <p class="service-desc">Monitor market fluctuations and industry benchmarks. Make informed planning decisions using our intelligence forecast engine.</p>
+            <span class="service-link">Learn More <i data-lucide="chevron-right"></i></span>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="why-section" id="why-choose-us">
+      <div class="section-container">
+        
+        <div class="section-header reveal-item">
+          <h2 class="section-title">Why Teams Choose <span class="gradient-text">Nova AI</span></h2>
+          <p class="section-subtitle">Compare our next-generation architecture with traditional operations stacks.</p>
+        </div>
+
+        <div class="why-grid">
+          
+          <div class="why-card reveal-item card-glow">
+            <div class="why-badge cyan-badge">Speed</div>
+            <h3 class="why-card-title">Hyper-fast Executions</h3>
+            <p class="why-card-desc">With distributed tensor compilation, our automated tasks execute up to 10x faster than traditional node loops.</p>
+          </div>
+
+          <div class="why-card reveal-item card-glow">
+            <div class="why-badge">Security</div>
+            <h3 class="why-card-title">Enterprise Security</h3>
+            <p class="why-card-desc">GDPR, HIPAA, and SOC2 compliant configurations. Your data is isolated in separate virtual clusters.</p>
+          </div>
+
+          <div class="why-card reveal-item card-glow">
+            <div class="why-badge blue-badge">Modern</div>
+            <h3 class="why-card-title">Stripe-level UX</h3>
+            <p class="why-card-desc">A beautiful design with premium control dashboards, interactive debugging logs, and seamless UI interfaces.</p>
+          </div>
+
+          <div class="why-card reveal-item card-glow">
+            <div class="why-badge purple-badge">Reliable</div>
+            <h3 class="why-card-title">Self-healing Workflows</h3>
+            <p class="why-card-desc">If an external API endpoint fails, Nova AI automatically handles errors, retries steps, and re-routes pipelines.</p>
+          </div>
+
+          <div class="why-card reveal-item card-glow">
+            <div class="why-badge cyan-badge">Affordable</div>
+            <h3 class="why-card-title">Scalable Rates</h3>
+            <p class="why-card-desc">Flexible pay-as-you-go and tiered plans designed to fit everyone from bootstrap solo founders to enterprise giants.</p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section" id="pricing">
+      <div class="section-container">
+        
+        <div class="section-header reveal-item">
+          <h2 class="section-title">Simple, Transparent <span class="gradient-text">Pricing</span></h2>
+          <p class="section-subtitle">Start building immediately. Scale pricing according to your actual operational throughput.</p>
+          
+          <!-- Pricing Toggle -->
+          <div class="pricing-toggle-container">
+            <span class="toggle-label active" id="toggle-monthly">Monthly</span>
+            <button class="pricing-toggle-btn" id="pricing-toggle" aria-label="Toggle Billing Cycle">
+              <span class="pricing-toggle-circle"></span>
+            </button>
+            <span class="toggle-label" id="toggle-annual">Annually <span class="discount-badge">Save 20%</span></span>
+          </div>
+        </div>
+
+        <div class="pricing-grid">
+          
+          <!-- Starter Plan -->
+          <div class="pricing-card reveal-item card-glow" id="plan-starter">
+            <h3 class="plan-name">Starter</h3>
+            <p class="plan-desc">For developers and small team experiments.</p>
+            <div class="plan-price">
+              <span class="price-symbol">$</span>
+              <span class="price-val" data-monthly="19" data-annual="15">19</span>
+              <span class="price-period">/mo</span>
+            </div>
+            <a href="#contact" class="btn btn-secondary pricing-btn">Get Started</a>
+            <ul class="plan-features">
+              <li><i data-lucide="check" class="check-icon"></i> <span>5,000 tasks/month</span></li>
+              <li><i data-lucide="check" class="check-icon"></i> <span>Basic chatbot access</span></li>
+              <li><i data-lucide="check" class="check-icon"></i> <span>10 GB secure cloud storage</span></li>
+              <li><i data-lucide="check" class="check-icon"></i> <span>Standard dashboard analytics</span></li>
+              <li class="disabled"><i data-lucide="x" class="cross-icon"></i> <span>TPU hardware compilation</span></li>
+              <li class="disabled"><i data-lucide="x" class="cross-icon"></i> <span>Dedicated account manager</span></li>
+            </ul>
+          </div>
+
+          <!-- Professional Plan (Highlighted) -->
+          <div class="pricing-card professional reveal-item card-glow featured-plan" id="plan-professional">
+            <div class="popular-badge">Most Popular</div>
+            <h3 class="plan-name">Professional</h3>
+            <p class="plan-desc">For growing startups and core business operations.</p>
+            <div class="plan-price">
+              <span class="price-symbol">$</span>
+              <span class="price-val" data-monthly="49" data-annual="39">49</span>
+              <span class="price-period">/mo</span>
+            </div>
+            <a href="#contact" class="btn btn-primary glowing-btn pricing-btn">Get Started Free</a>
+            <ul class="plan-features">
+              <li><i data-lucide="check" class="check-icon"></i> <span>50,000 tasks/month</span></li>
+              <li><i data-lucide="check" class="check-icon"></i> <span>Advanced reasoning chatbot</span></li>
+              <li><i data-lucide="check" class="check-icon"></i> <span>100 GB secure cloud storage</span></li>
+              <li><i data-lucide="check" class="check-icon"></i> <span>Deep analytics + reports</span></li>
+              <li><i data-lucide="check" class="check-icon"></i> <span>TPU hardware compilation</span></li>
+              <li class="disabled"><i data-lucide="x" class="cross-icon"></i> <span>Dedicated account manager</span></li>
+            </ul>
+          </div>
+
+          <!-- Enterprise Plan -->
+          <div class="pricing-card reveal-item card-glow" id="plan-enterprise">
+            <h3 class="plan-name">Enterprise</h3>
+            <p class="plan-desc">For large scale operations demanding dedicated power.</p>
+            <div class="plan-price">
+              <span class="price-symbol">$</span>
+              <span class="price-val" data-monthly="199" data-annual="159">199</span>
+              <span class="price-period">/mo</span>
+            </div>
+            <a href="#contact" class="btn btn-secondary pricing-btn">Contact Sales</a>
+            <ul class="plan-features">
+              <li><i data-lucide="check" class="check-icon"></i> <span>Unlimited tasks/month</span></li>
+              <li><i data-lucide="check" class="check-icon"></i> <span>Custom trained LLM nodes</span></li>
+              <li><i data-lucide="check" class="check-icon"></i> <span>1 TB secure cloud storage</span></li>
+              <li><i data-lucide="check" class="check-icon"></i> <span>Custom real-time APIs</span></li>
+              <li><i data-lucide="check" class="check-icon"></i> <span>Priority TPU priority compilation</span></li>
+              <li><i data-lucide="check" class="check-icon"></i> <span>Dedicated account manager</span></li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section" id="testimonials">
+      <div class="section-container">
+        
+        <div class="section-header reveal-item">
+          <h2 class="section-title">Loved by <span class="gradient-text">Builders</span></h2>
+          <p class="section-subtitle">Read how digital leaders use Nova AI to optimize their software releases.</p>
+        </div>
+
+        <div class="testimonials-grid">
+          
+          <!-- Testimonial 1 -->
+          <div class="testimonial-card reveal-item card-glow">
+            <div class="testimonial-rating">
+              <i data-lucide="star" class="star-fill"></i>
+              <i data-lucide="star" class="star-fill"></i>
+              <i data-lucide="star" class="star-fill"></i>
+              <i data-lucide="star" class="star-fill"></i>
+              <i data-lucide="star" class="star-fill"></i>
+            </div>
+            <p class="testimonial-text">
+              "Integrating Nova AI into our code validation pipeline has reduced manual errors by 90%. The AI chatbot behaves like an experienced tech lead."
+            </p>
+            <div class="testimonial-user">
+              <div class="user-avatar gradient-avatar-1">AH</div>
+              <div class="user-info">
+                <span class="user-name">Alex Hales</span>
+                <span class="user-title">VP of Product, CloudTech</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial 2 -->
+          <div class="testimonial-card reveal-item card-glow">
+            <div class="testimonial-rating">
+              <i data-lucide="star" class="star-fill"></i>
+              <i data-lucide="star" class="star-fill"></i>
+              <i data-lucide="star" class="star-fill"></i>
+              <i data-lucide="star" class="star-fill"></i>
+              <i data-lucide="star" class="star-fill"></i>
+            </div>
+            <p class="testimonial-text">
+              "The workflow automation module is incredible. The dashboard feels just as smooth as Stripe. We scaled from 1K tasks to 100K effortlessly."
+            </p>
+            <div class="testimonial-user">
+              <div class="user-avatar gradient-avatar-2">SK</div>
+              <div class="user-info">
+                <span class="user-name">Sarah Jenkins</span>
+                <span class="user-title">Co-Founder, SaaSify</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial 3 -->
+          <div class="testimonial-card reveal-item card-glow">
+            <div class="testimonial-rating">
+              <i data-lucide="star" class="star-fill"></i>
+              <i data-lucide="star" class="star-fill"></i>
+              <i data-lucide="star" class="star-fill"></i>
+              <i data-lucide="star" class="star-fill"></i>
+              <i data-lucide="star" class="star-fill"></i>
+            </div>
+            <p class="testimonial-text">
+              "Security was our primary blocker for migrating to AI tools. Nova's virtual cluster isolation let us pass security audits within days."
+            </p>
+            <div class="testimonial-user">
+              <div class="user-avatar gradient-avatar-3">MR</div>
+              <div class="user-info">
+                <span class="user-name">Marcus Russo</span>
+                <span class="user-title">CTO, SecureLogistics</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section" id="faq">
+      <div class="section-container faq-container">
+        
+        <div class="section-header reveal-item">
+          <h2 class="section-title">Frequently Asked <span class="gradient-text">Questions</span></h2>
+          <p class="section-subtitle">Got questions? We've got answers. Explore how Nova AI can fit your operational workflow.</p>
+        </div>
+
+        <div class="faq-accordion reveal-item">
+          
+          <div class="faq-item" id="faq-1">
+            <button class="faq-trigger" aria-expanded="false" aria-controls="faq-content-1">
+              <span>How does Nova AI integrate with my existing tools?</span>
+              <span class="faq-icon-box"><i data-lucide="plus" class="faq-icon"></i></span>
+            </button>
+            <div class="faq-content" id="faq-content-1" role="region" aria-labelledby="faq-1">
+              <div class="faq-content-inner">
+                <p>Nova AI supports native integrations with Slack, Discord, GitHub, Stripe, Salesforce, and over 1,500 other SaaS platforms through our webhooks. You can set up workflows through our visual canvas or programmatically via our API.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" id="faq-2">
+            <button class="faq-trigger" aria-expanded="false" aria-controls="faq-content-2">
+              <span>Is my data secure with Nova AI?</span>
+              <span class="faq-icon-box"><i data-lucide="plus" class="faq-icon"></i></span>
+            </button>
+            <div class="faq-content" id="faq-content-2" role="region" aria-labelledby="faq-2">
+              <div class="faq-content-inner">
+                <p>Security is our absolute priority. We utilize end-to-end homomorphic encryption. All datasets are isolated inside dedicated virtual clusters. We do not use your proprietary business data to train our foundational models.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" id="faq-3">
+            <button class="faq-trigger" aria-expanded="false" aria-controls="faq-content-3">
+              <span>Can I upgrade or downgrade my plan at any time?</span>
+              <span class="faq-icon-box"><i data-lucide="plus" class="faq-icon"></i></span>
+            </button>
+            <div class="faq-content" id="faq-content-3" role="region" aria-labelledby="faq-3">
+              <div class="faq-content-inner">
+                <p>Yes. You can upgrade, downgrade, or cancel your monthly or annual subscription at any time directly through your account dashboard. Downgrades will apply at the end of the current billing cycle.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" id="faq-4">
+            <button class="faq-trigger" aria-expanded="false" aria-controls="faq-content-4">
+              <span>Do you offer a free trial?</span>
+              <span class="faq-icon-box"><i data-lucide="plus" class="faq-icon"></i></span>
+            </button>
+            <div class="faq-content" id="faq-content-4" role="region" aria-labelledby="faq-4">
+              <div class="faq-content-inner">
+                <p>Absolutely. We offer a 14-day free trial on the Professional plan. No credit card is required to sign up. You will get full access to the task automation pipeline during this period.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" id="faq-5">
+            <button class="faq-trigger" aria-expanded="false" aria-controls="faq-content-5">
+              <span>How does the AI model stay updated?</span>
+              <span class="faq-icon-box"><i data-lucide="plus" class="faq-icon"></i></span>
+            </button>
+            <div class="faq-content" id="faq-content-5" role="region" aria-labelledby="faq-5">
+              <div class="faq-content-inner">
+                <p>Our foundation models are retrained weekly on verified open-source pipelines. In addition, we deploy live reinforcement learning checks that safely fine-tune localized task workflows to your specific preferences.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Call To Action Section -->
+    <section class="cta-section">
+      <div class="section-container">
+        <div class="cta-banner card-glow reveal-item">
+          <div class="cta-banner-content">
+            <h2 class="cta-title">Ready to Transform Your Workflow?</h2>
+            <p class="cta-desc">Join thousands of high-velocity teams utilizing Nova AI to automate their operations.</p>
+            <a href="#pricing" class="btn btn-primary glowing-btn">Start Free Today <i data-lucide="rocket"></i></a>
+          </div>
+          <!-- CTA Background Glow Details -->
+          <div class="cta-glow-element"></div>
         </div>
       </div>
-    </header>
+    </section>
 
-    <main>
-      <!-- Hero Section -->
-      <section class="hero-section section-padding" id="home">
-        <div class="container hero-container">
-          <div class="hero-content reveal-up">
-            <div class="badge-container">
-              <span class="badge"
-                ><i data-lucide="terminal" class="badge-icon"></i> Open to
-                Internships</span
-              >
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+      <div class="section-container contact-container">
+        
+        <div class="contact-info-panel reveal-item">
+          <h2 class="section-title">Get in <span class="gradient-text">Touch</span></h2>
+          <p class="contact-panel-desc">Have questions about integrations, security audits, or enterprise customized plans? Drop us a line.</p>
+          
+          <div class="contact-details">
+            <div class="contact-detail-item">
+              <div class="detail-icon"><i data-lucide="mail"></i></div>
+              <div class="detail-text">
+                <span class="detail-label">Email Us</span>
+                <a href="mailto:hello@nova-ai.io" class="detail-val">hello@nova-ai.io</a>
+              </div>
             </div>
-            <h1 class="hero-title">
-              Hi, I'm <span class="gradient-text">Sindhi Prince</span>
-            </h1>
-            <h2 class="hero-subtitle">
-              I am a <span class="typing-text" id="typing-text"></span
-              ><span class="typed-cursor">|</span>
-            </h2>
-            <p class="hero-description">
-              Crafting beautiful, responsive, and user-friendly web experiences
-              through clean code and continuous learning.
-            </p>
-            <div class="hero-buttons">
-              <a href="#resume" class="btn btn-primary" id="hero-btn-resume">
-                <span>Download Resume</span>
-                <i data-lucide="download" class="btn-icon"></i>
-              </a>
-                    <a href="#contact" class="btn btn-secondary" id="hero-btn-contact">
-                        <span>Contact Me</span>
-                        <i data-lucide="arrow-right" class="btn-icon"></i>
-                    </a>
-                </div>
-                <div class="hero-stats">
-                    <div class="stat-item">
-                        <div class="stat-num-container">
-                            <span class="stat-number" data-target="3">0</span>
-                        </div>
-                        <span class="stat-label">Learning Projects</span>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-num-container">
-                            <span class="stat-number" data-target="10">0</span
-                  ><span class="stat-plus">+</span>
-                        </div>
-                        <span class="stat-label">Tech Skills</span>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-num-container">
-                            <span class="stat-number" data-target="500">0</span
-                  ><span class="stat-plus">+</span>
-                        </div>
-                        <span class="stat-label">Learning Hours</span>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-num-container">
-                            <span class="stat-number" data-target="100">0</span
-                  ><span class="stat-plus">%</span>
-                        </div>
-                        <span class="stat-label">Coding Passion</span>
-                    </div>
-                </div>
+            <div class="contact-detail-item">
+              <div class="detail-icon"><i data-lucide="map-pin"></i></div>
+              <div class="detail-text">
+                <span class="detail-label">HQ Office</span>
+                <span class="detail-val">One Infinite Loop, Cupertino, CA</span>
+              </div>
             </div>
+            <div class="contact-detail-item">
+              <div class="detail-icon"><i data-lucide="phone"></i></div>
+              <div class="detail-text">
+                <span class="detail-label">Call Support</span>
+                <span class="detail-val">+1 (555) 019-9432</span>
+              </div>
+            </div>
+          </div>
 
-            <div class="hero-image-container reveal-scale">
-                <div class="hero-image-wrapper">
-                    <div class="hero-image-glowing-backdrop"></div>
-                    <img src="assets/avatar.png" alt="Sindhi Prince - Profile Image" class="hero-profile-image" id="hero-avatar" />
-                    <div class="tech-tag tag-js float-anim-1">
-                        <i data-lucide="code-2"></i><span>JS</span>
-                    </div>
-                    <div class="tech-tag tag-react float-anim-2">
-                        <i data-lucide="atom"></i><span>React</span>
-                    </div>
-                    <div class="tech-tag tag-design float-anim-3">
-                        <i data-lucide="figma"></i><span>UI/UX</span>
-                    </div>
-                </div>
+          <!-- Stylized Google Maps Placeholder -->
+          <div class="maps-mockup card-glow">
+            <div class="map-overlay">
+              <div class="map-marker-glow"></div>
+              <div class="map-tooltip">Nova AI HQ</div>
             </div>
+            <!-- Styled grid patterns for map graphic representation -->
+            <div class="map-grid-pattern"></div>
+          </div>
         </div>
 
-        <a href="#about" class="scroll-down-indicator" aria-label="Scroll to About Me section">
-            <div class="mouse">
-                <div class="wheel"></div>
+        <div class="contact-form-panel reveal-item card-glow" id="contact-form-card">
+          <form class="contact-form" id="contact-form" novalidate>
+            <div class="form-group">
+              <input type="text" id="contact-name" class="form-input" placeholder=" " required>
+              <label for="contact-name" class="form-label">Full Name</label>
+              <span class="input-focus-line"></span>
             </div>
-            <span>Scroll Down</span>
+            
+            <div class="form-group">
+              <input type="email" id="contact-email" class="form-input" placeholder=" " required>
+              <label for="contact-email" class="form-label">Email Address</label>
+              <span class="input-focus-line"></span>
+            </div>
+            
+            <div class="form-group">
+              <textarea id="contact-message" class="form-input text-area-input" placeholder=" " rows="5" required></textarea>
+              <label for="contact-message" class="form-label">Your Message</label>
+              <span class="input-focus-line"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary glowing-btn form-submit-btn" id="contact-submit-btn">
+              <span>Send Message</span>
+              <i data-lucide="send"></i>
+            </button>
+            <div class="form-status-msg" id="form-status"></div>
+          </form>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="section-container footer-container">
+      
+      <div class="footer-brand">
+        <a href="#home" class="footer-logo">
+          <span class="logo-spark">✨</span>
+          <span class="logo-title">Nova<span class="gradient-text">AI</span></span>
         </a>
-        </section>
+        <p class="footer-brand-desc">The future of artificial intelligence starts here. Build cognitive networks to scale your team.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-icon" aria-label="X (Twitter)"><i data-lucide="twitter"></i></a>
+          <a href="#" class="social-icon" aria-label="GitHub"><i data-lucide="github"></i></a>
+          <a href="#" class="social-icon" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+          <a href="#" class="social-icon" aria-label="YouTube"><i data-lucide="youtube"></i></a>
+        </div>
+      </div>
 
-        <!-- About Me Section -->
-        <section class="about-section section-padding" id="about">
-            <div class="container">
-                <div class="section-header reveal-up">
-                    <h2 class="section-title">
-                        About <span class="gradient-text">Me</span>
-                    </h2>
-                    <p class="section-subtitle">
-                        My education, professional journey, and who I am
-                    </p>
-                </div>
+      <div class="footer-links-grid">
+        <div class="footer-links-col">
+          <h4 class="footer-title">Quick Links</h4>
+          <ul class="footer-list">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links-col">
+          <h4 class="footer-title">Services</h4>
+          <ul class="footer-list">
+            <li><a href="#services">AI Chatbot</a></li>
+            <li><a href="#services">Workflow Automation</a></li>
+            <li><a href="#services">Data Analysis</a></li>
+            <li><a href="#services">Business Intelligence</a></li>
+          </ul>
+        </div>
 
-                <div class="about-grid">
-                    <div class="about-image-column reveal-left">
-                        <div class="about-image-card">
-                            <img src="assets/avatar.png" alt="Sindhi Prince Professional Portrait" class="about-image" id="about-avatar" />
-                            <div class="experience-badge">
-                                <span class="badge-num">BCA</span>
-                                <span class="badge-txt">Student</span>
-                            </div>
-                        </div>
-                    </div>
+        <div class="footer-links-col newsletter-col">
+          <h4 class="footer-title">Newsletter</h4>
+          <p class="newsletter-desc">Subscribe to stay updated with product updates and AI workflow optimizations.</p>
+          <form class="newsletter-form" id="newsletter-form">
+            <input type="email" class="newsletter-input" id="newsletter-email" placeholder="Enter your email" required aria-label="Newsletter Email Input">
+            <button type="submit" class="newsletter-btn" aria-label="Subscribe to newsletter"><i data-lucide="arrow-right"></i></button>
+          </form>
+          <div class="newsletter-status" id="newsletter-status"></div>
+        </div>
+      </div>
 
-                    <div class="about-content-column reveal-right">
-                        <h3 class="about-heading">
-                            Transforming Ideas into Digital Realities
-                        </h3>
-                        <p class="about-bio">
-                            I am a passionate BCA student at Sankalchand Patel University with a strong interest in Frontend Web Development. I enjoy building visually appealing, responsive, and user-friendly websites using HTML, CSS, and JavaScript.
-                        </p>
-                        <p class="about-bio">
-                            I continuously improve my technical skills through learning and practical implementation. My long-term goal is to become a skilled Full Stack Developer and contribute to innovative technology solutions.
-                        </p>
+    </div>
 
-                        <div class="about-cards-grid">
-                            <div class="info-card">
-                                <i data-lucide="graduation-cap" class="card-icon"></i>
-                                <h4>Education</h4>
-                                <p>Bachelor of Computer Applications (BCA)</p>
-                                <span class="card-sub">Sankalchand Patel University (2024 - 2027)</span
-                  >
-                </div>
+    <div class="footer-bottom">
+      <div class="section-container footer-bottom-container">
+        <span class="copyright-text">&copy; 2026 Nova AI Inc. All rights reserved.</span>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Security Audits</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 
-                <div class="info-card">
-                  <i data-lucide="target" class="card-icon"></i>
-                  <h4>Career Goal</h4>
-                  <p>
-                    I aim to build a successful career in Web Development by
-                    continuously learning modern technologies, creating
-                    high-quality projects, and contributing to innovative
-                    software solutions.
-                  </p>
-                </div>
-              </div>
-
-              <div class="personal-info-row">
-                <div class="info-item">
-                  <span class="info-label">Name:</span>
-                                <span class="info-value">Sindhi Prince</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">College:</span>
-                                <span class="info-value">Sankalchand Patel University</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Course:</span>
-                                <span class="info-value">BCA</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Duration:</span>
-                                <span class="info-value">2024 – 2027</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Location:</span>
-                                <span class="info-value">Patan, Gujarat, India</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Email:</span>
-                                <span class="info-value">princesindhi40@gmail.com</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Phone:</span>
-                                <span class="info-value">+91 9510668161</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Skills Section -->
-        <section class="skills-section section-padding" id="skills">
-            <div class="container">
-                <div class="section-header reveal-up">
-                    <h2 class="section-title">
-                        My <span class="gradient-text">Skills</span>
-                    </h2>
-                    <p class="section-subtitle">
-                        The technological tools and stack I use to build premium websites
-                    </p>
-                </div>
-
-                <div class="skills-grid">
-                    <!-- HTML5 Card -->
-                    <div class="skill-card reveal-up">
-                        <div class="skill-icon-wrapper html-color">
-                            <i data-lucide="file-code-2"></i>
-                        </div>
-                        <div class="skill-info">
-                            <div class="skill-header">
-                                <span class="skill-name">HTML5</span>
-                                <span class="skill-percentage" data-val="90">0%</span>
-                            </div>
-                            <div class="skill-progress-bg">
-                                <div class="skill-progress-bar" style="--width: 90%"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- CSS3 Card -->
-                    <div class="skill-card reveal-up">
-                        <div class="skill-icon-wrapper css-color">
-                            <i data-lucide="palette"></i>
-                        </div>
-                        <div class="skill-info">
-                            <div class="skill-header">
-                                <span class="skill-name">CSS3</span>
-                                <span class="skill-percentage" data-val="85">0%</span>
-                            </div>
-                            <div class="skill-progress-bg">
-                                <div class="skill-progress-bar" style="--width: 85%"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- JavaScript Card -->
-                    <div class="skill-card reveal-up">
-                        <div class="skill-icon-wrapper js-color">
-                            <i data-lucide="braces"></i>
-                        </div>
-                        <div class="skill-info">
-                            <div class="skill-header">
-                                <span class="skill-name">JavaScript</span>
-                                <span class="skill-percentage" data-val="75">0%</span>
-                            </div>
-                            <div class="skill-progress-bg">
-                                <div class="skill-progress-bar" style="--width: 75%"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Responsive Design Card -->
-                    <div class="skill-card reveal-up">
-                        <div class="skill-icon-wrapper resp-color">
-                            <i data-lucide="smartphone"></i>
-                        </div>
-                        <div class="skill-info">
-                            <div class="skill-header">
-                                <span class="skill-name">Responsive Web Design</span>
-                                <span class="skill-percentage" data-val="85">0%</span>
-                            </div>
-                            <div class="skill-progress-bg">
-                                <div class="skill-progress-bar" style="--width: 85%"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Bootstrap Card -->
-                    <div class="skill-card reveal-up">
-                        <div class="skill-icon-wrapper bs-color">
-                            <i data-lucide="layout-grid"></i>
-                        </div>
-                        <div class="skill-info">
-                            <div class="skill-header">
-                                <span class="skill-name">Bootstrap</span>
-                                <span class="skill-percentage" data-val="70">0%</span>
-                            </div>
-                            <div class="skill-progress-bg">
-                                <div class="skill-progress-bar" style="--width: 70%"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Git Card -->
-                    <div class="skill-card reveal-up">
-                        <div class="skill-icon-wrapper git-color">
-                            <i data-lucide="git-branch"></i>
-                        </div>
-                        <div class="skill-info">
-                            <div class="skill-header">
-                                <span class="skill-name">Git</span>
-                                <span class="skill-percentage" data-val="65">0%</span>
-                            </div>
-                            <div class="skill-progress-bg">
-                                <div class="skill-progress-bar" style="--width: 65%"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- GitHub Card -->
-                    <div class="skill-card reveal-up">
-                        <div class="skill-icon-wrapper github-color">
-                            <i data-lucide="github"></i>
-                        </div>
-                        <div class="skill-info">
-                            <div class="skill-header">
-                                <span class="skill-name">GitHub</span>
-                                <span class="skill-percentage" data-val="70">0%</span>
-                            </div>
-                            <div class="skill-progress-bg">
-                                <div class="skill-progress-bar" style="--width: 70%"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Problem Solving Card -->
-                    <div class="skill-card reveal-up">
-                        <div class="skill-icon-wrapper ps-color">
-                            <i data-lucide="brain"></i>
-                        </div>
-                        <div class="skill-info">
-                            <div class="skill-header">
-                                <span class="skill-name">Problem Solving</span>
-                                <span class="skill-percentage" data-val="90">0%</span>
-                            </div>
-                            <div class="skill-progress-bg">
-                                <div class="skill-progress-bar" style="--width: 90%"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- React Card -->
-                    <div class="skill-card reveal-up">
-                        <div class="skill-icon-wrapper react-color">
-                            <i data-lucide="atom"></i>
-                        </div>
-                        <div class="skill-info">
-                            <div class="skill-header">
-                                <span class="skill-name">Learning React</span>
-                                <span class="skill-percentage" data-val="35">0%</span>
-                            </div>
-                            <div class="skill-progress-bg">
-                                <div class="skill-progress-bar" style="--width: 35%"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Node Card -->
-                    <div class="skill-card reveal-up">
-                        <div class="skill-icon-wrapper node-color">
-                            <i data-lucide="server"></i>
-                        </div>
-                        <div class="skill-info">
-                            <div class="skill-header">
-                                <span class="skill-name">Learning Node.js</span>
-                                <span class="skill-percentage" data-val="25">0%</span>
-                            </div>
-                            <div class="skill-progress-bg">
-                                <div class="skill-progress-bar" style="--width: 25%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section class="projects-section section-padding" id="projects">
-            <div class="container">
-                <div class="section-header reveal-up">
-                    <h2 class="section-title">
-                        My Learning <span class="gradient-text">Projects</span>
-                    </h2>
-                    <p class="section-subtitle">
-                        A timeline showcase of files and tasks during my web development journey
-                    </p>
-                </div>
-
-                <div class="projects-grid">
-                    <!-- Project 1 -->
-                    <article class="project-card reveal-up" id="project-card-1">
-                        <div class="project-image-wrapper">
-                            <img src="assets/project1.png" alt="Portfolio Website Project Mockup" class="project-img" />
-                            <div class="project-overlay">
-                                <div class="project-tags">
-                                    <span class="project-tag">HTML</span>
-                                    <span class="project-tag">CSS</span>
-                                    <span class="project-tag">JavaScript</span>
-                                </div>
-                                <span class="status-badge status-completed">Completed</span>
-                            </div>
-                        </div>
-                        <div class="project-info">
-                            <h3 class="project-title">Portfolio Website</h3>
-                            <p class="project-desc">
-                                A responsive personal portfolio website developed using HTML, CSS, and JavaScript to showcase my skills, education, and future projects.
-                            </p>
-                            <div class="project-links">
-                                <a href="#" class="btn btn-sm btn-primary project-btn-live">
-                                    <span>Live Demo</span>
-                                    <i data-lucide="external-link"></i>
-                                </a>
-                                <a href="https://github.com/HackerxE16/HackerxE16" target="_blank" rel="noopener" class="btn btn-sm btn-secondary project-btn-git">
-                                    <span>GitHub</span>
-                                    <i data-lucide="github"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Project 2 -->
-                    <article class="project-card reveal-up" id="project-card-2">
-                        <div class="project-image-wrapper">
-                            <img src="assets/project2.png" alt="SaaS Product Landing Page Mockup" class="project-img" />
-                            <div class="project-overlay">
-                                <div class="project-tags">
-                                    <span class="project-tag">HTML</span>
-                                    <span class="project-tag">CSS</span>
-                                </div>
-                                <span class="status-badge status-learning">Learning Project</span
-                  >
-                </div>
-              </div>
-              <div class="project-info">
-                <h3 class="project-title">Modern Landing Page</h3>
-                <p class="project-desc">
-                  A responsive landing page built while learning advanced
-                  layouts, Flexbox, Grid, animations, and UI design principles.
-                </p>
-                <div class="project-links">
-                  <a href="#" class="btn btn-sm btn-primary project-btn-live">
-                    <span>Live Demo</span>
-                                <i data-lucide="external-link"></i>
-                                </a>
-                                <a href="https://github.com/HackerxE16" target="_blank" rel="noopener" class="btn btn-sm btn-secondary project-btn-git">
-                                    <span>GitHub</span>
-                                    <i data-lucide="github"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Project 3 -->
-                    <article class="project-card reveal-up" id="project-card-3">
-                        <div class="project-image-wrapper">
-                            <img src="assets/project3.png" alt="Glassmorphic Calculator UI Mockup" class="project-img" />
-                            <div class="project-overlay">
-                                <div class="project-tags">
-                                    <span class="project-tag">HTML</span>
-                                    <span class="project-tag">CSS</span>
-                                    <span class="project-tag">JavaScript</span>
-                                </div>
-                                <span class="status-badge status-learning">Learning Project</span
-                  >
-                </div>
-              </div>
-              <div class="project-info">
-                <h3 class="project-title">Calculator Application</h3>
-                <p class="project-desc">
-                  A calculator application built using HTML, CSS, and JavaScript
-                  to practice DOM manipulation, events, and JavaScript
-                  fundamentals.
-                </p>
-                <div class="project-links">
-                  <a href="#" class="btn btn-sm btn-primary project-btn-live">
-                    <span>Live Demo</span>
-                                <i data-lucide="external-link"></i>
-                                </a>
-                                <a href="https://github.com/HackerxE16" target="_blank" rel="noopener" class="btn btn-sm btn-secondary project-btn-git">
-                                    <span>GitHub</span>
-                                    <i data-lucide="github"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- Resume Section -->
-        <section class="resume-section section-padding" id="resume">
-            <div class="container">
-                <div class="section-header reveal-up">
-                    <h2 class="section-title">
-                        My <span class="gradient-text">Resume</span>
-                    </h2>
-                    <p class="section-subtitle">
-                        A summary of my education, certificates, and coding accomplishments
-                    </p>
-                </div>
-
-                <div class="resume-container">
-                    <div class="resume-grid">
-                        <div class="timeline-column reveal-left">
-                            <h3 class="timeline-group-title">
-                                <i data-lucide="graduation-cap"></i> Education
-                            </h3>
-                            <div class="timeline">
-                                <div class="timeline-item">
-                                    <div class="timeline-dot"></div>
-                                    <span class="timeline-date">2024 - 2027</span>
-                                    <h4 class="timeline-title">
-                                        Bachelor of Computer Applications (BCA)
-                                    </h4>
-                                    <h5 class="timeline-company">
-                                        Sankalchand Patel University
-                                    </h5>
-                                    <p class="timeline-text">
-                                        Focusing on basic computing, databases, web technology foundations, and object-oriented architectures.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="timeline-column reveal-right">
-                            <h3 class="timeline-group-title">
-                                <i data-lucide="award"></i> Goals & Direction
-                            </h3>
-                            <div class="timeline">
-                                <div class="timeline-item">
-                                    <div class="timeline-dot"></div>
-                                    <span class="timeline-date">Continuous</span>
-                                    <h4 class="timeline-title">Frontend Engineering Focus</h4>
-                                    <h5 class="timeline-company">Self-Learning & Projects</h5>
-                                    <p class="timeline-text">
-                                        Dedication to building robust, accessible UIs. Learning layout frameworks and reactive models dynamically.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="resume-cta reveal-up">
-                        <div class="resume-card-box">
-                            <div class="resume-card-glow"></div>
-                            <div class="resume-card-icon">
-                                <i data-lucide="file-text"></i>
-                            </div>
-                            <div class="resume-card-info">
-                                <h3>Curriculum Vitae</h3>
-                                <p>
-                                    Interested in hiring me as an intern or junior web developer? Get my resume for more details.
-                                </p>
-                            </div>
-                            <a href="#" class="btn btn-primary" download id="btn-download-resume">
-                                <span>Download Resume</span>
-                                <i data-lucide="download"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section class="contact-section section-padding" id="contact">
-            <div class="container">
-                <div class="section-header reveal-up">
-                    <h2 class="section-title">
-                        Get In <span class="gradient-text">Touch</span>
-                    </h2>
-                    <p class="section-subtitle">
-                        Have an internship, project, or opportunity? Contact me today.
-                    </p>
-                </div>
-
-                <div class="contact-grid">
-                    <div class="contact-info-column reveal-left">
-                        <h3 class="contact-column-title">Contact Information</h3>
-                        <p class="contact-lead-text">
-                            Feel free to reach out via the form, directly by phone, or email. I usually respond within 24 hours.
-                        </p>
-
-                        <div class="contact-cards-stack">
-                            <!-- Phone -->
-                            <div class="contact-info-card">
-                                <div class="contact-icon-box">
-                                    <i data-lucide="phone"></i>
-                                </div>
-                                <div class="contact-card-text">
-                                    <span class="contact-label">Phone Number</span>
-                                    <a href="tel:+919510668161" class="contact-link" id="contact-phone">+91 9510668161</a
-                    >
-                  </div>
-                </div>
-
-                <!-- Email -->
-                <div class="contact-info-card">
-                  <div class="contact-icon-box">
-                    <i data-lucide="mail"></i>
-                  </div>
-                  <div class="contact-card-text">
-                    <span class="contact-label">Email Address</span>
-                    <a
-                      href="mailto:princesindhi40@gmail.com"
-                      class="contact-link"
-                      id="contact-email"
-                      >princesindhi40@gmail.com</a
-                    >
-                  </div>
-                </div>
-
-                <!-- Location -->
-                <div class="contact-info-card">
-                  <div class="contact-icon-box">
-                    <i data-lucide="map-pin"></i>
-                  </div>
-                  <div class="contact-card-text">
-                    <span class="contact-label">Location</span>
-                    <span class="contact-text-val" id="contact-location"
-                      >Patan, Gujarat, India</span
-                    >
-                  </div>
-                </div>
-              </div>
-
-              <div class="social-links-container">
-                <span class="social-title">Follow Me</span>
-                <div class="social-icons">
-                  <a
-                    href="https://github.com/HackerxE16"
-                    target="_blank"
-                    rel="noopener"
-                    aria-label="GitHub Profile"
-                    class="social-icon"
-                    id="social-git"
-                  >
-                    <i data-lucide="github"></i>
-                  </a>
-                                    <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn Profile" class="social-icon" id="social-in">
-                                        <i data-lucide="linkedin"></i>
-                                    </a>
-                                    <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram Profile" class="social-icon" id="social-ig">
-                                        <i data-lucide="instagram"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="contact-form-column reveal-right">
-                            <div class="form-wrapper">
-                                <h3 class="form-title">Send a Message</h3>
-
-                                <form id="contact-form" class="contact-form" novalidate>
-                                    <div class="input-group">
-                                        <input type="text" id="form-name" required class="form-input" placeholder=" " />
-                                        <label for="form-name" class="form-label">Name</label>
-                                        <span class="input-line"></span>
-                                        <div class="error-msg" id="name-error">
-                                            Please enter your name
-                                        </div>
-                                    </div>
-
-                                    <div class="input-group">
-                                        <input type="email" id="form-email" required class="form-input" placeholder=" " />
-                                        <label for="form-email" class="form-label">Email</label>
-                                        <span class="input-line"></span>
-                                        <div class="error-msg" id="email-error">
-                                            Please enter a valid email
-                                        </div>
-                                    </div>
-
-                                    <div class="input-group">
-                                        <input type="tel" id="form-phone" class="form-input" placeholder=" " />
-                                        <label for="form-phone" class="form-label">Phone Number (Optional)</label
-                    >
-                    <span class="input-line"></span>
-                  </div>
-
-                  <div class="input-group">
-                    <textarea
-                      id="form-message"
-                      required
-                      class="form-input form-textarea"
-                      placeholder=" "
-                      rows="4"
-                    ></textarea>
-                    <label for="form-message" class="form-label">Message</label>
-                                        <span class="input-line"></span>
-                                        <div class="error-msg" id="message-error">
-                                            Please enter your message
-                                        </div>
-                                    </div>
-
-                                    <button type="submit" class="btn btn-primary btn-submit" id="btn-submit-form">
-                    <span>Send Message</span>
-                    <i data-lucide="send" class="btn-icon"></i>
-                  </button>
-
-                                    <div class="form-notification" id="form-status">
-                                        <i data-lucide="check-circle" class="status-icon success-icon"></i>
-                                        <i data-lucide="alert-circle" class="status-icon error-icon"></i>
-                                        <span class="status-message"></span>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-        </section>
-        </main>
-
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="container footer-container">
-                <div class="footer-logo">
-                    <span class="logo-accent">&lt;</span>Sindhi<span>Prince</span
-          ><span class="logo-accent">/&gt;</span>
-                </div>
-
-                <p class="footer-quote">
-                    "Every expert was once a beginner. I believe in learning, building, and improving every single day."
-                </p>
-
-                <ul class="footer-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#skills">Skills</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#resume">Resume</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-
-                <p class="copyright" id="footer-copy">
-                    &copy; 2026 Sindhi Prince. All Rights Reserved. Crafted with passion.
-                </p>
-            </div>
-
-            <!-- Back to Top Button -->
-            <a href="#home" class="back-to-top" id="back-to-top" aria-label="Back to top">
-                <i data-lucide="arrow-up"></i>
-            </a>
-        </footer>
-
-        <!-- Main JavaScript -->
-        <script src="script.js"></script>
+  <!-- Scripts -->
+  <script src="script.js"></script>
 </body>
-
 </html>

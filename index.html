@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A premium glassmorphism calculator with AI voice assistant, sound synth profiles, quick interactive math solvers, and 4 premium color themes.">
+  <title>Smart Calculator - Fast • Modern • Accurate</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- LOADING SCREEN -->
+  <div class="loading-screen" id="loadingScreen">
+    <div class="spinner"></div>
+    <div class="loading-text">Smart Calculator</div>
+  </div>
+
+  <!-- BACKGROUND FLOATING ORBS -->
+  <div class="bg-animations">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- MAIN APP CONTAINER -->
+  <div class="app-container">
+
+    <!-- LEFT DRAWER: SMART SOLVERS -->
+    <aside class="drawer-panel collapsed" id="solversPanel">
+      <div class="drawer-header">
+        <h2>Smart Solvers</h2>
+      </div>
+      <div class="solver-scroll">
+        <!-- Solver tool selector -->
+        <select class="glass-select" id="solverSelect" style="width: 100%; margin-bottom: 16px;">
+          <option value="split">Bill & Tip Splitter</option>
+          <option value="bmi">BMI Calculator</option>
+          <option value="pythagoras">Pythagoras Hypotenuse</option>
+        </select>
+
+        <!-- Solver templates container -->
+        <div id="solverFormsContainer">
+          
+          <!-- 1. Bill Splitter Form -->
+          <div class="solver-form" id="formSplit">
+            <div class="form-group">
+              <label for="billAmt">Bill Total ($)</label>
+              <input type="number" id="billAmt" placeholder="e.g. 120" min="0" step="0.01">
+            </div>
+            <div class="form-group">
+              <label for="tipPct">Tip (%)</label>
+              <input type="number" id="tipPct" placeholder="e.g. 15" min="0" value="15">
+            </div>
+            <div class="form-group">
+              <label for="splitPeople">People Count</label>
+              <input type="number" id="splitPeople" placeholder="e.g. 3" min="1" value="2">
+            </div>
+            <button class="solver-btn" id="btnSolveSplit">Calculate Split</button>
+            
+            <div class="solver-results-box" id="resultSplit" style="display: none;">
+              <div class="result-row">
+                <span class="result-label">Tip Total:</span>
+                <span class="result-value" id="valTipTotal">$0.00</span>
+              </div>
+              <div class="result-row">
+                <span class="result-label">Tip Per Person:</span>
+                <span class="result-value" id="valTipPer">$0.00</span>
+              </div>
+              <div class="result-row">
+                <span class="result-label">Total Per Person:</span>
+                <span class="result-value highlight" id="valTotalPer">$0.00</span>
+              </div>
+              <button class="loadback-btn" id="loadbackSplit">Load Share to Calc</button>
+            </div>
+          </div>
+
+          <!-- 2. BMI Calculator Form -->
+          <div class="solver-form" id="formBmi" style="display: none;">
+            <div class="form-group">
+              <label for="bmiWeight">Weight (kg)</label>
+              <input type="number" id="bmiWeight" placeholder="e.g. 70" min="1" step="0.1">
+            </div>
+            <div class="form-group">
+              <label for="bmiHeight">Height (cm)</label>
+              <input type="number" id="bmiHeight" placeholder="e.g. 175" min="1">
+            </div>
+            <button class="solver-btn" id="btnSolveBmi">Calculate BMI</button>
+            
+            <div class="solver-results-box" id="resultBmi" style="display: none;">
+              <div class="result-row">
+                <span class="result-label">BMI Score:</span>
+                <span class="result-value highlight" id="valBmiScore">0.0</span>
+              </div>
+              <div class="result-row">
+                <span class="result-label">Classification:</span>
+                <span class="result-value" id="valBmiClass">Normal</span>
+              </div>
+              <button class="loadback-btn" id="loadbackBmi">Load BMI to Calc</button>
+            </div>
+          </div>
+
+          <!-- 3. Pythagoras Solver Form -->
+          <div class="solver-form" id="formPythagoras" style="display: none;">
+            <div class="form-group">
+              <label for="pythA">Side a</label>
+              <input type="number" id="pythA" placeholder="e.g. 3" min="0" step="any">
+            </div>
+            <div class="form-group">
+              <label for="pythB">Side b</label>
+              <input type="number" id="pythB" placeholder="e.g. 4" min="0" step="any">
+            </div>
+            <button class="solver-btn" id="btnSolvePyth">Calculate Hypotenuse</button>
+            
+            <div class="solver-results-box" id="resultPyth" style="display: none;">
+              <div class="result-row">
+                <span class="result-label">Hypotenuse (c):</span>
+                <span class="result-value highlight" id="valPythC">0.00</span>
+              </div>
+              <button class="loadback-btn" id="loadbackPyth">Load Side c to Calc</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </aside>
+    
+    <!-- CALCULATOR WRAPPER -->
+    <main class="calculator-wrapper">
+      
+      <!-- HEADER -->
+      <header>
+        <div class="logo-section">
+          <div class="animated-logo">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="50" r="40" stroke="url(#logoGrad)" stroke-width="8" class="logo-ring" stroke-linecap="round" />
+              <circle cx="50" cy="50" r="18" fill="url(#logoInnerGrad)" class="logo-inner" />
+              <defs>
+                <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#9d4edd" />
+                  <stop offset="100%" stop-color="#00f5d4" />
+                </linearGradient>
+                <linearGradient id="logoInnerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#00b4d8" />
+                  <stop offset="100%" stop-color="#9d4edd" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <div class="title-section">
+            <h1>Smart Calculator</h1>
+            <p>Fast • Modern • Accurate</p>
+          </div>
+        </div>
+
+        <!-- CONTROLS -->
+        <div class="controls-section">
+          <!-- Solvers Drawer Switch -->
+          <button class="control-btn" id="solversToggle" data-tooltip="Smart Solvers" aria-label="Toggle math solvers">
+            <svg viewBox="0 0 24 24">
+              <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/>
+            </svg>
+          </button>
+
+          <!-- Themes Dropdown Preset Selector -->
+          <select class="glass-select" id="themeSelect" data-tooltip="Select Theme" aria-label="Theme Selection">
+            <option value="midnight">Midnight Glass</option>
+            <option value="cyberpunk">Cyberpunk Neon</option>
+            <option value="aurora">Emerald Aurora</option>
+            <option value="sakura">Sakura Quartz</option>
+          </select>
+
+          <!-- Audio Synth Profile Selector -->
+          <select class="glass-select" id="soundProfileSelect" data-tooltip="Sound Profile" aria-label="Sound Profile Selection">
+            <option value="chime">Chime Synth</option>
+            <option value="8bit">8-Bit Retro</option>
+            <option value="keyboard">Mech Click</option>
+            <option value="mute">Muted</option>
+          </select>
+
+          <!-- Speech Read Aloud Toggle -->
+          <button class="control-btn" id="voiceSpeakToggle" data-tooltip="Speech Off" aria-label="Toggle voice output readback">
+            <svg class="icon-default" viewBox="0 0 24 24">
+              <!-- Speech bubble off (with diagonal slash) -->
+              <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z"/>
+            </svg>
+            <svg class="icon-alt" viewBox="0 0 24 24">
+              <!-- Speech bubble active (with audio waves inside or sound) -->
+              <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-9 12H9v-2h2v2zm0-4H9V8h2v2zm4 4h-2v-2h2v2zm0-4h-2V8h2v2z"/>
+            </svg>
+          </button>
+          
+          <!-- History Toggle Button -->
+          <button class="control-btn" id="historyToggle" data-tooltip="History Log" aria-label="Toggle history log">
+            <svg viewBox="0 0 24 24">
+              <path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/>
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- DISPLAY SCREEN -->
+      <section class="screen" aria-live="polite">
+        <div class="previous-op" id="prevOp"></div>
+        <div class="current-val-container">
+          <!-- Screen Action controls (Voice Mic & Copy) -->
+          <div class="screen-controls">
+            <!-- Voice speech recognition mic button -->
+            <button class="mic-btn" id="voiceBtn" title="Speak equation (e.g. 'five times six')" aria-label="Microphone Voice Input">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"/>
+              </svg>
+            </button>
+            <button class="copy-btn" id="copyResult" title="Copy result to clipboard" aria-label="Copy result">
+              <svg viewBox="0 0 24 24">
+                <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+              </svg>
+            </button>
+          </div>
+          <div class="current-val" id="currentVal">0</div>
+        </div>
+        <div class="copy-toast" id="copyToast">Copied!</div>
+      </section>
+
+      <!-- KEYPAD GRID -->
+      <section class="keypad">
+        <!-- Row 1 -->
+        <button class="key key-clear" data-action="clear">AC</button>
+        <button class="key key-clear" data-action="delete">DEL</button>
+        <button class="key key-op" data-char="%">%</button>
+        <button class="key key-op" data-char="÷">÷</button>
+        
+        <!-- Row 2 -->
+        <button class="key" data-char="7">7</button>
+        <button class="key" data-char="8">8</button>
+        <button class="key" data-char="9">9</button>
+        <button class="key key-op" data-char="×">×</button>
+        
+        <!-- Row 3 -->
+        <button class="key" data-char="4">4</button>
+        <button class="key" data-char="5">5</button>
+        <button class="key" data-char="6">6</button>
+        <button class="key key-op" data-char="−">−</button>
+        
+        <!-- Row 4 -->
+        <button class="key" data-char="1">1</button>
+        <button class="key" data-char="2">2</button>
+        <button class="key" data-char="3">3</button>
+        <button class="key key-op" data-char="+">+</button>
+        
+        <!-- Row 5 -->
+        <button class="key" data-action="toggle-sign">+/-</button>
+        <button class="key" data-char="0">0</button>
+        <button class="key" data-char=".">.</button>
+        <button class="key key-equals" data-action="calculate">=</button>
+      </section>
+
+    </main>
+
+    <!-- RIGHT DRAWER: CALCULATION HISTORY -->
+    <aside class="drawer-panel collapsed" id="historyPanel">
+      <div class="drawer-header">
+        <h2>History Log</h2>
+        <button class="clear-history-btn" id="clearHistory" title="Clear All History" aria-label="Clear calculation history">
+          <svg viewBox="0 0 24 24">
+            <path d="M15 4V3H9v1H4v2h16V4h-5zm1 4H8v11h8V8zm-8 13c-1.1 0-2-.9-2-2V7h12v12c0 1.1-.9 2-2 2H8z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="history-list" id="historyList">
+        <div class="history-empty">No calculations yet</div>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    Smart Calculator &bull; Fast &bull; Modern &bull; Accurate
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
